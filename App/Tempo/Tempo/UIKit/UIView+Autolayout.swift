@@ -10,34 +10,34 @@ import UIKit
 
 /// All-to-common utility for pinning a subviews edges to it's parentview edges.
 public extension UIView {
-    public func pinSubview(subview: UIView) {
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[subview]-0-|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["subview": subview]))
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subview]-0-|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["subview": subview]))
+    public func pinSubview(_ subview: UIView) {
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[subview]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["subview": subview]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[subview]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["subview": subview]))
     }
     
-    public func addAndPinSubview(subview: UIView) {
+    public func addAndPinSubview(_ subview: UIView) {
         addSubview(subview)
         pinSubview(subview)
     }
     
-    public func addAndCenterSubview(subview: UIView) {
+    public func addAndCenterSubview(_ subview: UIView) {
         addSubview(subview)
         centerSubview(subview)
     }
     
-    func pinSubviewToMargins(subview: UIView) {
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[subview]-|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["subview": subview]))
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-[subview]-|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["subview": subview]))
+    func pinSubviewToMargins(_ subview: UIView) {
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[subview]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["subview": subview]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[subview]-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["subview": subview]))
     }
     
-    func centerSubview(subview: UIView) {
+    func centerSubview(_ subview: UIView) {
         addConstraints([
-            NSLayoutConstraint(item: subview, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1.0, constant: 0.0),
-            NSLayoutConstraint(item: subview, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
+            NSLayoutConstraint(item: subview, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: subview, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         ])
     }
     
-    func addAndPinSubviewToMargins(subview: UIView) {
+    func addAndPinSubviewToMargins(_ subview: UIView) {
         addSubview(subview)
         pinSubviewToMargins(subview)
     }
@@ -45,14 +45,14 @@ public extension UIView {
 }
 
 extension UIViewController {
-    public func pinRootSubview(subview: UIView) {
+    public func pinRootSubview(_ subview: UIView) {
         let views: [String: AnyObject] = ["subview": subview, "topGuide": topLayoutGuide, "bottomGuide": bottomLayoutGuide]
         
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[subview]-0-|", options: .DirectionLeadingToTrailing, metrics: nil, views:views))
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[topGuide][subview][bottomGuide]|", options: .DirectionLeadingToTrailing, metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[subview]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views:views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[topGuide][subview][bottomGuide]|", options: NSLayoutFormatOptions(), metrics: nil, views: views))
     }
     
-    public func addAndPinRootSubview(subview: UIView) {
+    public func addAndPinRootSubview(_ subview: UIView) {
         view.addSubview(subview)
         pinRootSubview(subview)
     }

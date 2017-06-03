@@ -15,20 +15,20 @@
 		5BEF08121D6632EC006BF0C0 /* ListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF08111D6632EC006BF0C0 /* ListCoordinator.swift */; };
 		5BEF08141D663304006BF0C0 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF08131D663304006BF0C0 /* ListViewController.swift */; };
 		5BEF08161D66333C006BF0C0 /* ListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF08151D66333C006BF0C0 /* ListViewState.swift */; };
-		5BEF081A1D66338E006BF0C0 /* Tempo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BEF08191D66338E006BF0C0 /* Tempo.framework */; };
-		5BEF081B1D66338E006BF0C0 /* Tempo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5BEF08191D66338E006BF0C0 /* Tempo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5BEF081F1D663598006BF0C0 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF081E1D663598006BF0C0 /* ProductListView.swift */; };
 		5BEF08211D6635B2006BF0C0 /* ProductListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF08201D6635B2006BF0C0 /* ProductListView.xib */; };
+		6C036B411EE354FA0005FD65 /* Tempo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C036B401EE354FA0005FD65 /* Tempo.framework */; };
+		6C036B421EE354FA0005FD65 /* Tempo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C036B401EE354FA0005FD65 /* Tempo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		5BEF081C1D66338E006BF0C0 /* Embed Frameworks */ = {
+		6C036B431EE354FB0005FD65 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5BEF081B1D66338E006BF0C0 /* Tempo.framework in Embed Frameworks */,
+				6C036B421EE354FA0005FD65 /* Tempo.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,6 +49,7 @@
 		5BEF08191D66338E006BF0C0 /* Tempo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Tempo.framework; path = "/Users/z013sbd/Library/Developer/Xcode/DerivedData/TargetCaseStudy-agdipiwuywmqhicruecwwhjdwcjb/Build/Products/Debug-iphonesimulator/Tempo.framework"; sourceTree = "<absolute>"; };
 		5BEF081E1D663598006BF0C0 /* ProductListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 		5BEF08201D6635B2006BF0C0 /* ProductListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductListView.xib; sourceTree = "<group>"; };
+		6C036B401EE354FA0005FD65 /* Tempo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Tempo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BEF081A1D66338E006BF0C0 /* Tempo.framework in Frameworks */,
+				6C036B411EE354FA0005FD65 /* Tempo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +67,7 @@
 		5B259CBD1D6630E0001D755F = {
 			isa = PBXGroup;
 			children = (
+				6C036B401EE354FA0005FD65 /* Tempo.framework */,
 				5BEF08191D66338E006BF0C0 /* Tempo.framework */,
 				5B259CC81D6630E0001D755F /* ProductViewer */,
 				5B259CC71D6630E0001D755F /* Products */,
@@ -132,7 +134,7 @@
 				5B259CC21D6630E0001D755F /* Sources */,
 				5B259CC31D6630E0001D755F /* Frameworks */,
 				5B259CC41D6630E0001D755F /* Resources */,
-				5BEF081C1D66338E006BF0C0 /* Embed Frameworks */,
+				6C036B431EE354FB0005FD65 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -311,6 +313,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.target.ProductViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -323,6 +326,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.target.ProductViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

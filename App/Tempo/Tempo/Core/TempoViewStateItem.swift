@@ -14,12 +14,12 @@ public protocol TempoViewStateItem {
     var focused: Bool { get }
     var items: [TempoViewStateItem]? { get }
 
-    func isEqualTo(other: TempoViewStateItem) -> Bool
+    func isEqualTo(_ other: TempoViewStateItem) -> Bool
 }
 
 public extension TempoViewStateItem {
     var identifier: String {
-        return String(self.dynamicType)
+        return String(describing: type(of: self))
     }
 
     var numberOfItems: Int {
@@ -38,13 +38,13 @@ public extension TempoViewStateItem {
         return nil
     }
 
-    func isEqualTo(other: TempoViewStateItem) -> Bool {
+    func isEqualTo(_ other: TempoViewStateItem) -> Bool {
         return numberOfItems == other.numberOfItems
     }
 }
 
 public extension TempoViewStateItem where Self : Equatable {
-    func isEqualTo(other: TempoViewStateItem) -> Bool {
+    func isEqualTo(_ other: TempoViewStateItem) -> Bool {
         guard let o = other as? Self else {
             return false
         }
@@ -55,14 +55,14 @@ public extension TempoViewStateItem where Self : Equatable {
 
 public func == (lhs: [TempoViewStateItem], rhs: [TempoViewStateItem]) -> Bool {
     return lhs.count == rhs.count
-        && !zip(lhs, rhs).contains({ !$0.0.isEqualTo($0.1) })
+        && !zip(lhs, rhs).contains(where: { !$0.0.isEqualTo($0.1) })
 }
 
 public func == (lhs: [TempoViewStateItem]?, rhs: [TempoViewStateItem]?) -> Bool {
     switch (lhs, rhs) {
-    case (.Some(let left), .Some(let right)):
+    case (.some(let left), .some(let right)):
         return left == right
-    case (.None, .None):
+    case (.none, .none):
         return true
     default:
         return false

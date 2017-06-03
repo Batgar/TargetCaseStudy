@@ -11,22 +11,22 @@ import Tempo
 
 class ListViewController: UIViewController {
     
-    class func viewControllerFor(coordinator coordinator: TempoCoordinator) -> ListViewController {
+    class func viewControllerFor(coordinator: TempoCoordinator) -> ListViewController {
         let viewController = ListViewController()
         viewController.coordinator = coordinator
         
         return viewController
     }
     
-    private var coordinator: TempoCoordinator!
+    fileprivate var coordinator: TempoCoordinator!
     
     lazy var collectionView: UICollectionView = {
         let harmonyLayout = HarmonyLayout()
         
-        harmonyLayout.collectionViewMargins = HarmonyLayoutMargins(top: .Narrow, right: .None, bottom: .Narrow, left: .None)
-        harmonyLayout.defaultSectionMargins = HarmonyLayoutMargins(top: .Narrow, right: .None, bottom: .None, left: .None)
+        harmonyLayout.collectionViewMargins = HarmonyLayoutMargins(top: .narrow, right: .none, bottom: .narrow, left: .none)
+        harmonyLayout.defaultSectionMargins = HarmonyLayoutMargins(top: .narrow, right: .none, bottom: .none, left: .none)
         
-        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: harmonyLayout)
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: harmonyLayout)
         collectionView.backgroundColor = .targetFadeAwayGrayColor
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.alwaysBounceVertical = true
@@ -55,7 +55,7 @@ class ListViewController: UIViewController {
 
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
     }
     

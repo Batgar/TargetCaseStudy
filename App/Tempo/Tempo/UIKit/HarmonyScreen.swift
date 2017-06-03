@@ -9,10 +9,10 @@
 import UIKit
 
 public struct HarmonyScreen {
-    public static let onePixel = 1 / UIScreen.mainScreen().scale
+    public static let onePixel = 1 / UIScreen.main.scale
 }
 
 @objc
-public class HarmonyScreenObjC: NSObject {
-    public static let onePixel = 1 / UIScreen.mainScreen().scale
+open class HarmonyScreenObjC: NSObject {
+    open static let onePixel = 1 / UIScreen.main.scale
 }

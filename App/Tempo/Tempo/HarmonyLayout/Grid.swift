@@ -16,11 +16,11 @@ public struct Grid {
     public let columns: Int
 
     /// The current number of rows in the grid.
-    public private(set) var rows: Int = 0
+    public fileprivate(set) var rows: Int = 0
 
     // MARK: Private properties
 
-    private var spaces: [Space] = []
+    fileprivate var spaces: [Space] = []
 
     // MARK: Public methods
 
@@ -28,7 +28,7 @@ public struct Grid {
         self.columns = columns
     }
 
-    public mutating func place(tile: Tile) -> Rect {
+    public mutating func place(_ tile: Tile) -> Rect {
         var remainingSpaces = spaces
 
         while !remainingSpaces.isEmpty {
@@ -39,14 +39,14 @@ public struct Grid {
                     // Replace remaining spaces with this rect cut out of it
                     var newSpaces = [Space]()
                     for space in spaces {
-                        newSpaces.appendContentsOf(space.bisect(rect))
+                        newSpaces.append(contentsOf: space.bisect(rect))
                     }
 
                     // If the tile extends past the available spaces, make new spaces for partial rows
                     if (tile.width < columns && rows < rect.y + rect.height) {
                         for row in rows..<rect.y + rect.height {
                             let space = Space(position: row, columns: columns)
-                            newSpaces.appendContentsOf(space.bisect(rect))
+                            newSpaces.append(contentsOf: space.bisect(rect))
                         }
                     }
 
@@ -76,12 +76,12 @@ public struct Grid {
 
     // MARK: Private methods
 
-    private func place(tile: Tile, space: Space, row: Int, column: Int) -> Bool {
+    fileprivate func place(_ tile: Tile, space: Space, row: Int, column: Int) -> Bool {
         let requiredSpace = Space(position: row, indexes: column..<column + tile.width)
         return space.contains(requiredSpace)
     }
 
-    private func place(tile: Tile, spaces: [Space], row: Int, column: Int) -> Bool {
+    fileprivate func place(_ tile: Tile, spaces: [Space], row: Int, column: Int) -> Bool {
         for space in spaces {
             if place(tile, space: space, row: row, column: column) {
                 return true
@@ -91,8 +91,9 @@ public struct Grid {
         return false
     }
 
-    private func place(tile: Tile, spaces: [Space], rows: Range<Int>, column: Int) -> Bool {
-        for row in rows {
+    fileprivate func place(_ tile: Tile, spaces: [Space], rows: Range<Int>, column: Int) -> Bool {
+        //See also: https://stackoverflow.com/a/39825088
+        for row in [Int](rows.lowerBound..<rows.upperBound) {
             if !place(tile, spaces: spaces, row: row, column: column) && row < self.rows {
                 return false
             }
@@ -101,8 +102,8 @@ public struct Grid {
         return true
     }
 
-    private func place(tile: Tile, space: Space, spaces: [Space]) -> Int? {
-        for column in space.indexes {
+    fileprivate func place(_ tile: Tile, space: Space, spaces: [Space]) -> Int? {
+        for column in [Int](space.indexes.lowerBound..<space.indexes.upperBound) { //space.indexes {
             if place(tile, spaces: spaces, rows: space.position..<space.position + tile.height, column: column) {
                 return column
             }
@@ -132,7 +133,7 @@ public struct Grid {
 
     struct Space: CustomDebugStringConvertible {
         let position: Int
-        let indexes: Range<Int>
+        let indexes: /*Countable*/Range<Int>
 
         var debugDescription: String {
             return "\(position): \(indexes)"
@@ -151,13 +152,13 @@ public struct Grid {
             return indexes.isEmpty
         }
 
-        func contains(space: Space) -> Bool {
+        func contains(_ space: Space) -> Bool {
             return space.position == position
-                && space.indexes.startIndex >= indexes.startIndex
-                && space.indexes.endIndex <= indexes.endIndex
+                && space.indexes.lowerBound >= indexes.lowerBound
+                && space.indexes.upperBound <= indexes.upperBound
         }
 
-        func bisect(rect: Rect) -> [Space] {
+        func bisect(_ rect: Rect) -> [Space] {
             guard position >= rect.y && position < rect.y + rect.height else {
                 return [self]
             }
@@ -167,12 +168,12 @@ public struct Grid {
             }
 
             var sections = [Space]()
-            if indexes.startIndex < rect.x && rect.x < indexes.endIndex {
-                sections.append(Space(position: position, indexes: indexes.startIndex..<rect.x))
+            if indexes.lowerBound < rect.x && rect.x < indexes.upperBound {
+                sections.append(Space(position: position, indexes: indexes.lowerBound..<rect.x))
             }
 
-            if indexes.startIndex < rect.x + rect.width && rect.x + rect.width < indexes.endIndex {
-                sections.append(Space(position: position, indexes: rect.x + rect.width..<indexes.endIndex))
+            if indexes.lowerBound < rect.x + rect.width && rect.x + rect.width < indexes.upperBound {
+                sections.append(Space(position: position, indexes: rect.x + rect.width..<indexes.upperBound))
             }
             
             return sections

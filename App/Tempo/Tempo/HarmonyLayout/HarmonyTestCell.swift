@@ -1,7 +1,7 @@
 import UIKit
 
 
-public class HarmonyTestCell: HarmonyCellBase {
+open class HarmonyTestCell: HarmonyCellBase {
 
     // MARK: - Internal Functions
 
@@ -19,12 +19,12 @@ public class HarmonyTestCell: HarmonyCellBase {
 
     var label: UILabel = UILabel(frame: CGRect(x: 5, y: 5, width: 200, height: 50))
     
-    private func setup() {
+    fileprivate func setup() {
         label.text = "Harmony"
         contentView.addSubview(label)
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         label.center.y = contentView.center.y

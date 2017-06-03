@@ -9,54 +9,54 @@
 import UIKit
 
 extension CollectionViewAdapter: HarmonyLayoutDelegate {
-    public func harmonyLayout(harmonyLayout: HarmonyLayout, heightForItemAtIndexPath indexPath: NSIndexPath, forWidth: CGFloat) -> CGFloat {
+    public func harmonyLayout(_ harmonyLayout: HarmonyLayout, heightForItemAtIndexPath indexPath: IndexPath, forWidth: CGFloat) -> CGFloat {
         return harmonyLayoutComponentFor(indexPath)?
             .heightForLayout(harmonyLayout, item: itemFor(indexPath), width: forWidth) ?? harmonyLayout.defaultItemHeight
     }
 
-    public func harmonyLayout(harmonyLayout: HarmonyLayout, marginsForSection section: Int) -> HarmonyLayoutMargins {
-        let indexPath = NSIndexPath(forItem: 0, inSection: section)
+    public func harmonyLayout(_ harmonyLayout: HarmonyLayout, marginsForSection section: Int) -> HarmonyLayoutMargins {
+        let indexPath = IndexPath(item: 0, section: section)
         return harmonyLayoutComponentFor(indexPath)?
             .sectionMarginsForLayout(harmonyLayout) ?? harmonyLayout.defaultSectionMargins
     }
 
-    public func harmonyLayout(harmonyLayout: HarmonyLayout, marginsForItemAtIndexPath indexPath: NSIndexPath) -> HarmonyLayoutMargins {
+    public func harmonyLayout(_ harmonyLayout: HarmonyLayout, marginsForItemAtIndexPath indexPath: IndexPath) -> HarmonyLayoutMargins {
         return harmonyLayoutComponentFor(indexPath)?
             .itemMarginsForLayout(harmonyLayout, item: itemFor(indexPath)) ?? harmonyLayout.defaultItemMargins
     }
 
-    public func harmonyLayout(harmonyLayout: HarmonyLayout, styleForItemAtIndexPath indexPath: NSIndexPath) -> HarmonyCellStyle {
+    public func harmonyLayout(_ harmonyLayout: HarmonyLayout, styleForItemAtIndexPath indexPath: IndexPath) -> HarmonyCellStyle {
         return harmonyLayoutComponentFor(indexPath)?
-            .styleForLayout(harmonyLayout, item: itemFor(indexPath)) ?? .Grouped
+            .styleForLayout(harmonyLayout, item: itemFor(indexPath)) ?? .grouped
     }
     
-    public func harmonyLayout(harmonyLayout: HarmonyLayout, separatorInsetsForItemAtIndexPath indexPath: NSIndexPath) -> UIEdgeInsets {
+    public func harmonyLayout(_ harmonyLayout: HarmonyLayout, separatorInsetsForItemAtIndexPath indexPath: IndexPath) -> UIEdgeInsets {
         return harmonyLayoutComponentFor(indexPath)?
-            .separatorInsetsForLayout(harmonyLayout, item: itemFor(indexPath)) ?? UIEdgeInsetsZero
+            .separatorInsetsForLayout(harmonyLayout, item: itemFor(indexPath)) ?? UIEdgeInsets.zero
     }
 
-    public func harmonyLayout(harmonyLayout: HarmonyLayout, tileSizeForItemAtIndexPath indexPath: NSIndexPath) -> HarmonyTileSize {
+    public func harmonyLayout(_ harmonyLayout: HarmonyLayout, tileSizeForItemAtIndexPath indexPath: IndexPath) -> HarmonyTileSize {
         return harmonyLayoutComponentFor(indexPath)?.tileSizeForLayout(harmonyLayout, item: itemFor(indexPath)) ?? harmonyLayout.defaultTileSize
     }
 
-    public func harmonyLayout(harmonyLayout: HarmonyLayout, tileSpacingForItemAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    public func harmonyLayout(_ harmonyLayout: HarmonyLayout, tileSpacingForItemAtIndexPath indexPath: IndexPath) -> CGFloat {
         return harmonyLayoutComponentFor(indexPath)?.tileSpacingForLayout(harmonyLayout, item: itemFor(indexPath)) ?? harmonyLayout.defaultTileSpacing
     }
 
-    public func harmonyLayout(harmonyLayout: HarmonyLayout, tileInsetsForItemAtIndexPath indexPath: NSIndexPath) -> UIEdgeInsets {
+    public func harmonyLayout(_ harmonyLayout: HarmonyLayout, tileInsetsForItemAtIndexPath indexPath: IndexPath) -> UIEdgeInsets {
         return harmonyLayoutComponentFor(indexPath)?.tileInsetsForLayout(harmonyLayout, item: itemFor(indexPath)) ?? harmonyLayout.defaultTileInsets
     }
 
-    public func harmonyLayout(harmonyLayout: HarmonyLayout, tileMarginsForItemAtIndexPath indexPath: NSIndexPath) -> UIEdgeInsets {
+    public func harmonyLayout(_ harmonyLayout: HarmonyLayout, tileMarginsForItemAtIndexPath indexPath: IndexPath) -> UIEdgeInsets {
         return harmonyLayoutComponentFor(indexPath)?.tileMarginsForLayout(harmonyLayout, item: itemFor(indexPath)) ?? harmonyLayout.defaultTileMargins
     }
 
-    public func harmonyLayout(harmonyLayout: HarmonyLayout, styleForSection section: Int) -> HarmonySectionStyle {
-        let indexPath = NSIndexPath(forItem: 0, inSection: section)
+    public func harmonyLayout(_ harmonyLayout: HarmonyLayout, styleForSection section: Int) -> HarmonySectionStyle {
+        let indexPath = IndexPath(item: 0, section: section)
         return harmonyLayoutComponentFor(indexPath)?.sectionStyleForLayout(harmonyLayout) ?? harmonyLayout.defaultSectionStyle
     }
 
-    private func harmonyLayoutComponentFor(indexPath: NSIndexPath) -> HarmonyLayoutComponent? {
+    fileprivate func harmonyLayoutComponentFor(_ indexPath: IndexPath) -> HarmonyLayoutComponent? {
         return componentFor(indexPath) as? HarmonyLayoutComponent
     }
 }

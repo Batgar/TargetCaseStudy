@@ -8,38 +8,38 @@
 
 public enum HarmonyLayoutMarginStyle {
     // Legacy margins
-    case None
-    case Narrow
-    case Wide
+    case none
+    case narrow
+    case wide
 
     // New margins
-    case Quarter
-    case Half
-    case Full
+    case quarter
+    case half
+    case full
 
     public var points: CGFloat {
         switch self {
-        case .None:
+        case .none:
             return 0.0
 
-        case .Quarter, .Narrow:
+        case .quarter, .narrow:
             return 4.0
 
-        case .Half:
+        case .half:
             return 8.0
 
-        case .Full, .Wide:
+        case .full, .wide:
             return 16.0
         }
     }
 }
 
 @objc
-public class HarmonyLayoutMargins: NSObject {
-    public var top: HarmonyLayoutMarginStyle
-    public var right: HarmonyLayoutMarginStyle
-    public var bottom: HarmonyLayoutMarginStyle
-    public var left: HarmonyLayoutMarginStyle
+open class HarmonyLayoutMargins: NSObject {
+    open var top: HarmonyLayoutMarginStyle
+    open var right: HarmonyLayoutMarginStyle
+    open var bottom: HarmonyLayoutMarginStyle
+    open var left: HarmonyLayoutMarginStyle
     
     public init(top: HarmonyLayoutMarginStyle,
                 right: HarmonyLayoutMarginStyle,
@@ -51,5 +51,5 @@ public class HarmonyLayoutMargins: NSObject {
         self.left = left
     }
     
-    public static let HarmonyLayoutMarginsZero = HarmonyLayoutMargins(top: .None, right: .None, bottom: .None, left: .None)
+    open static let HarmonyLayoutMarginsZero = HarmonyLayoutMargins(top: .none, right: .none, bottom: .none, left: .none)
 }

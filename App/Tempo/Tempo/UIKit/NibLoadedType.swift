@@ -15,7 +15,7 @@ public protocol NibLoadedType {
 extension NibLoadedType where Self: AnyObject {
     
     public static func loadFromNib() -> Self {
-        guard let view = NSBundle(forClass: self).loadNibNamed(Self.nibName, owner: nil, options: nil).first as? Self else {
+        guard let view = Bundle(for: self).loadNibNamed(Self.nibName, owner: nil, options: nil)?.first as? Self else {
             // Choosing fatalError over throws for cleaner consumer API.
             fatalError("Misconfigured NibLoadedType \(Self.nibName)")
         }

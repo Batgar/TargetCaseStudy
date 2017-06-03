@@ -12,11 +12,11 @@ public final class CollectionViewAdapter: NSObject {
     weak var scrollViewDelegate: UIScrollViewDelegate?
 
     let collectionView: UICollectionView
-    private let componentProvider: ComponentProvider
-    private var viewState: TempoSectionedViewState = InitialViewState()
-    private var focusingIndexPath: NSIndexPath?
+    fileprivate let componentProvider: ComponentProvider
+    fileprivate var viewState: TempoSectionedViewState = InitialViewState()
+    fileprivate var focusingIndexPath: IndexPath?
 
-    private struct InitialViewState: TempoSectionedViewState {
+    fileprivate struct InitialViewState: TempoSectionedViewState {
         var sections: [TempoViewStateItem] {
             return []
         }
@@ -38,93 +38,93 @@ public final class CollectionViewAdapter: NSObject {
 
     // MARK: - Public Methods
 
-    public func itemFor(indexPath: NSIndexPath) -> TempoViewStateItem {
+    public func itemFor(_ indexPath: IndexPath) -> TempoViewStateItem {
         return itemFor(indexPath, inViewState: viewState)
     }
 
-    public func sectionFor(section: Int) -> TempoViewStateItem {
+    public func sectionFor(_ section: Int) -> TempoViewStateItem {
         return viewState.sections[section]
     }
 
-    public func componentFor(indexPath: NSIndexPath) -> ComponentType {
+    public func componentFor(_ indexPath: IndexPath) -> ComponentType {
         let item = itemFor(indexPath)
         return componentProvider.componentFor(item)
     }
 
     // MARK: - Private Methods
 
-    private func insertSection(section: Int) {
-        collectionView.insertSections(NSIndexSet(index: section))
+    fileprivate func insertSection(_ section: Int) {
+        collectionView.insertSections(IndexSet(integer: section))
     }
 
-    private func deleteSection(section: Int) {
-        collectionView.deleteSections(NSIndexSet(index: section))
+    fileprivate func deleteSection(_ section: Int) {
+        collectionView.deleteSections(IndexSet(integer: section))
     }
 
-    private func updateSection(fromSection: Int, fromViewState: TempoSectionedViewState, toSection: Int) {
+    fileprivate func updateSection(_ fromSection: Int, fromViewState: TempoSectionedViewState, toSection: Int) {
         let section = fromViewState.sections[fromSection]
 
         for item in 0..<section.numberOfItems {
-            let fromIndexPath = NSIndexPath(forItem: item, inSection: fromSection)
-            let toIndexPath = NSIndexPath(forItem: item, inSection: toSection)
+            let fromIndexPath = IndexPath(item: item, section: fromSection)
+            let toIndexPath = IndexPath(item: item, section: toSection)
             itemInfoForIndexPath(fromIndexPath, fromViewState: fromViewState, toIndexPath: toIndexPath).configureView()
         }
     }
 
-    private func updateSection(fromSection: Int, fromViewState: TempoSectionedViewState, toSection: Int, itemUpdates: [CollectionViewItemUpdate]) {
+    fileprivate func updateSection(_ fromSection: Int, fromViewState: TempoSectionedViewState, toSection: Int, itemUpdates: [CollectionViewItemUpdate]) {
         for update in itemUpdates {
             switch update {
-            case .Delete(let item):
-                collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: item, inSection: fromSection)])
+            case .delete(let item):
+                collectionView.deleteItems(at: [IndexPath(item: item, section: fromSection)])
 
-            case .Insert(let item):
-                collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: item, inSection: toSection)])
+            case .insert(let item):
+                collectionView.insertItems(at: [IndexPath(item: item, section: toSection)])
 
-            case .Update(let fromItem, let toItem):
-                let fromIndexPath = NSIndexPath(forItem: fromItem, inSection: fromSection)
-                let toIndexPath = NSIndexPath(forItem: toItem, inSection: toSection)
+            case .update(let fromItem, let toItem):
+                let fromIndexPath = IndexPath(item: fromItem, section: fromSection)
+                let toIndexPath = IndexPath(item: toItem, section: toSection)
                 itemInfoForIndexPath(fromIndexPath, fromViewState: fromViewState, toIndexPath: toIndexPath).configureView()
             }
         }
     }
 
-    private func reloadSection(section: Int) {
-        collectionView.reloadSections(NSIndexSet(index: section))
+    fileprivate func reloadSection(_ section: Int) {
+        collectionView.reloadSections(IndexSet(integer: section))
     }
 
-    private func focus(focus: TempoFocus) {
+    fileprivate func focus(_ focus: TempoFocus) {
         guard focus.indexPath != focusingIndexPath else { // Scroll already in progress
             return
         }
 
-        guard let attributes = collectionView.layoutAttributesForItemAtIndexPath(focus.indexPath) else {
+        guard let attributes = collectionView.layoutAttributesForItem(at: focus.indexPath) else {
             return
         }
 
         let scrollPosition: UICollectionViewScrollPosition
 
         switch focus.position {
-        case .CenteredHorizontally:
-            scrollPosition = .CenteredHorizontally
+        case .centeredHorizontally:
+            scrollPosition = .centeredHorizontally
 
-        case .CenteredVertically:
-            scrollPosition = .CenteredVertically
+        case .centeredVertically:
+            scrollPosition = .centeredVertically
         }
 
-        if CGRectContainsRect(collectionView.bounds, attributes.frame) {
+        if collectionView.bounds.contains(attributes.frame) {
             // The item is already fully visible.
             didFocus(focus.indexPath, attributes: attributes)
         } else if focus.animated {
             // Track index path during animation. Reset in `scrollViewDidEndScrollingAnimation:`.
             focusingIndexPath = focus.indexPath
-            collectionView.scrollToItemAtIndexPath(focus.indexPath, atScrollPosition: scrollPosition, animated: true)
+            collectionView.scrollToItem(at: focus.indexPath, at: scrollPosition, animated: true)
         } else {
-            collectionView.scrollToItemAtIndexPath(focus.indexPath, atScrollPosition: scrollPosition, animated: false)
+            collectionView.scrollToItem(at: focus.indexPath, at: scrollPosition, animated: false)
             didFocus(focus.indexPath, attributes: attributes)
         }
     }
 
-    private func itemInfoForIndexPath(indexPath: NSIndexPath) -> CollectionViewItemInfo {
+    fileprivate func itemInfoForIndexPath(_ indexPath: IndexPath) -> CollectionViewItemInfo {
         let toViewState = itemFor(indexPath, inViewState: viewState)
         let component = componentProvider.componentFor(toViewState)
         let container = ReusableCollectionViewItemContainer(fromIndexPath: indexPath, toIndexPath: indexPath, collectionView: collectionView)
@@ -132,7 +132,7 @@ public final class CollectionViewAdapter: NSObject {
         return CollectionViewItemInfo(fromViewState: toViewState, toViewState: toViewState, component: component, container: container)
     }
 
-    private func itemInfoForIndexPath(fromIndexPath: NSIndexPath, fromViewState: TempoSectionedViewState, toIndexPath: NSIndexPath) -> CollectionViewItemInfo {
+    fileprivate func itemInfoForIndexPath(_ fromIndexPath: IndexPath, fromViewState: TempoSectionedViewState, toIndexPath: IndexPath) -> CollectionViewItemInfo {
         let fromViewState = itemFor(fromIndexPath, inViewState: fromViewState)
         let toViewState = itemFor(toIndexPath, inViewState: viewState)
         let component = componentProvider.componentFor(toViewState)
@@ -141,7 +141,7 @@ public final class CollectionViewAdapter: NSObject {
         return CollectionViewItemInfo(fromViewState: fromViewState, toViewState: toViewState, component: component, container: container)
     }
 
-    private func itemFor(indexPath: NSIndexPath, inViewState viewState: TempoSectionedViewState) -> TempoViewStateItem {
+    fileprivate func itemFor(_ indexPath: IndexPath, inViewState viewState: TempoSectionedViewState) -> TempoViewStateItem {
         let section = viewState.sections[indexPath.section]
 
         if let items = section.items {
@@ -151,7 +151,7 @@ public final class CollectionViewAdapter: NSObject {
         }
     }
     
-    private func didFocus(indexPath: NSIndexPath, attributes: UICollectionViewLayoutAttributes) {
+    fileprivate func didFocus(_ indexPath: IndexPath, attributes: UICollectionViewLayoutAttributes) {
         let itemInfo = itemInfoForIndexPath(indexPath)
         itemInfo.focusAccessibility()
         itemInfo.didFocus(attributes.frame, coordinateSpace: collectionView)
@@ -159,7 +159,7 @@ public final class CollectionViewAdapter: NSObject {
 }
 
 extension CollectionViewAdapter: SectionPresenterAdapter {
-    public func applyUpdates(updates: [CollectionViewSectionUpdate], viewState: TempoSectionedViewState) {
+    public func applyUpdates(_ updates: [CollectionViewSectionUpdate], viewState: TempoSectionedViewState) {
         let fromViewState = self.viewState
         self.viewState = viewState
 
@@ -170,19 +170,19 @@ extension CollectionViewAdapter: SectionPresenterAdapter {
         collectionView.performBatchUpdates({
             for update in updates {
                 switch update {
-                case .Delete(let index):
+                case .delete(let index):
                     self.deleteSection(index)
-                case .Insert(let index):
+                case .insert(let index):
                     self.insertSection(index)
-                case .Reload(let index):
+                case .reload(let index):
                     self.reloadSection(index)
-                case .Update(let fromIndex, let toIndex, let itemUpdates):
+                case .update(let fromIndex, let toIndex, let itemUpdates):
                     if itemUpdates.count > 0 {
                         self.updateSection(fromIndex, fromViewState: fromViewState, toSection: toIndex, itemUpdates: itemUpdates)
                     } else {
                         self.updateSection(fromIndex, fromViewState: fromViewState, toSection: toIndex)
                     }
-                case .Focus(let focus):
+                case .focus(let focus):
                     self.focus(focus)
                 }
             }
@@ -196,20 +196,20 @@ public struct ComponentWrapper<Cell> {
 }
 
 public protocol ReusableViewContainer {
-    func registerReusableView<T: UIView where T: Reusable>(viewType: T.Type)
-    func registerReusableView<T: UIView where T: Reusable>(viewType: T.Type, reuseIdentifier: String)
+    func registerReusableView<T: UIView where T: Reusable>(_ viewType: T.Type)
+    func registerReusableView<T: UIView where T: Reusable>(_ viewType: T.Type, reuseIdentifier: String)
 }
 
 public protocol ReusableViewItemContainer {
     associatedtype Cell
 
-    func dequeueReusableWrapper<T: UIView where T: Reusable, T: Creatable>(viewType: T.Type) -> ComponentWrapper<Cell>
-    func dequeueReusableWrapper<T: UIView where T: Reusable, T: Creatable>(viewType: T.Type, reuseIdentifier: String) -> ComponentWrapper<Cell>
-    func visibleWrapper<T: UIView where T: Reusable>(viewType: T.Type) -> ComponentWrapper<Cell>?
+    func dequeueReusableWrapper<T: UIView where T: Reusable, T: Creatable>(_ viewType: T.Type) -> ComponentWrapper<Cell>
+    func dequeueReusableWrapper<T: UIView where T: Reusable, T: Creatable>(_ viewType: T.Type, reuseIdentifier: String) -> ComponentWrapper<Cell>
+    func visibleWrapper<T: UIView where T: Reusable>(_ viewType: T.Type) -> ComponentWrapper<Cell>?
 }
 
 public extension ReusableViewItemContainer {
-    func dequeueReusableWrapper<T: UIView where T: Reusable, T: Creatable>(viewType: T.Type) -> ComponentWrapper<Cell> {
+    func dequeueReusableWrapper<T: UIView where T: Reusable, T: Creatable>(_ viewType: T.Type) -> ComponentWrapper<Cell> {
         return dequeueReusableWrapper(viewType, reuseIdentifier: viewType.reuseIdentifier)
     }
 }
@@ -217,18 +217,18 @@ public extension ReusableViewItemContainer {
 struct ReusableCollectionViewItemContainer: ReusableViewItemContainer {
     typealias Cell = UICollectionViewCell
 
-    var fromIndexPath: NSIndexPath
-    var toIndexPath: NSIndexPath
+    var fromIndexPath: IndexPath
+    var toIndexPath: IndexPath
     var collectionView: UICollectionView
     
-    func dequeueReusableWrapper<T: UIView where T: Reusable, T: Creatable>(viewType: T.Type, reuseIdentifier: String) -> ComponentWrapper<Cell> {
+    func dequeueReusableWrapper<T: UIView where T: Reusable, T: Creatable>(_ viewType: T.Type, reuseIdentifier: String) -> ComponentWrapper<Cell> {
         let cell = collectionView.dequeueWrappedReusable(viewType, reuseIdentifier: reuseIdentifier, indexPath: toIndexPath)
         let componentWrapper = ComponentWrapper(cell: cell as Cell, view: cell.reusableView)
         return componentWrapper
     }
 
-    func visibleWrapper<T: UIView where T: Reusable>(viewType: T.Type) -> ComponentWrapper<Cell>? {
-        guard let cell = collectionView.cellForItemAtIndexPath(fromIndexPath) as? CollectionViewWrapperCell<T> else {
+    func visibleWrapper<T: UIView where T: Reusable>(_ viewType: T.Type) -> ComponentWrapper<Cell>? {
+        guard let cell = collectionView.cellForItem(at: fromIndexPath) as? CollectionViewWrapperCell<T> else {
             return nil
         }
 
@@ -284,88 +284,88 @@ private struct CollectionViewItemInfo {
     }
 
     func selectView() {
-        if let view = view where shouldSelectView() {
+        if let view = view, shouldSelectView() {
             component.selectView(view, viewState: toViewState)
         }
     }
 
-    func didFocus(frame: CGRect, coordinateSpace: UICoordinateSpace) {
+    func didFocus(_ frame: CGRect, coordinateSpace: UICoordinateSpace) {
         component.didFocus(frame, coordinateSpace: coordinateSpace, viewState: toViewState)
     }
 }
 
 extension UICollectionView: ReusableViewContainer {
-    public func registerReusableView<T: UIView where T: Reusable>(viewType: T.Type) {
+    public func registerReusableView<T: UIView where T: Reusable>(_ viewType: T.Type) {
         registerWrappedReusable(viewType)
     }
 
-    public func registerReusableView<T: UIView where T: Reusable>(viewType: T.Type, reuseIdentifier: String) {
+    public func registerReusableView<T: UIView where T: Reusable>(_ viewType: T.Type, reuseIdentifier: String) {
         registerWrappedReusable(viewType, reuseIdentifier: reuseIdentifier)
     }
 }
 
 extension CollectionViewAdapter: UICollectionViewDataSource {
-    public func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return viewState.sections.count
     }
 
-    public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewState.sections[section].numberOfItems
     }
 
-    public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return itemInfoForIndexPath(indexPath).cell
     }
 }
 
 extension CollectionViewAdapter: UICollectionViewDelegate {
-    public func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         itemInfoForIndexPath(indexPath).selectView()
     }
 
-    public func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return itemInfoForIndexPath(indexPath).shouldHighlightView()
     }
 
-    public func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return itemInfoForIndexPath(indexPath).shouldSelectView()
     }
 }
 
 extension CollectionViewAdapter: UIScrollViewDelegate {
-    public func scrollViewDidScroll(scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollViewDelegate?.scrollViewDidScroll?(scrollView)
     }
 
-    public func scrollViewDidZoom(scrollView: UIScrollView) {
+    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
         scrollViewDelegate?.scrollViewDidZoom?(scrollView)
     }
 
-    public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollViewDelegate?.scrollViewWillBeginDragging?(scrollView)
     }
 
-    public func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         scrollViewDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
     }
 
-    public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         scrollViewDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
     }
 
-    public func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
+    public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         scrollViewDelegate?.scrollViewWillBeginDecelerating?(scrollView)
     }
 
-    public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         scrollViewDelegate?.scrollViewDidEndDecelerating?(scrollView)
     }
 
-    public func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         if let indexPath = focusingIndexPath {
             focusingIndexPath = nil
 
-            if let attributes = collectionView.layoutAttributesForItemAtIndexPath(indexPath) {
+            if let attributes = collectionView.layoutAttributesForItem(at: indexPath) {
                 didFocus(indexPath, attributes: attributes)
             }
         }
@@ -373,23 +373,23 @@ extension CollectionViewAdapter: UIScrollViewDelegate {
         scrollViewDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
     }
 
-    public func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return scrollViewDelegate?.viewForZoomingInScrollView?(scrollView)
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return scrollViewDelegate?.viewForZooming?(in: scrollView)
     }
 
-    public func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView?) {
-        scrollViewDelegate?.scrollViewWillBeginZooming?(scrollView, withView: view)
+    public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        scrollViewDelegate?.scrollViewWillBeginZooming?(scrollView, with: view)
     }
 
-    public func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView?, atScale scale: CGFloat) {
-        scrollViewDelegate?.scrollViewDidEndZooming?(scrollView, withView: view, atScale: scale)
+    public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        scrollViewDelegate?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale)
     }
 
-    public func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
+    public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
         return scrollViewDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? true
     }
 
-    public func scrollViewDidScrollToTop(scrollView: UIScrollView) {
+    public func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
         scrollViewDelegate?.scrollViewDidScrollToTop?(scrollView)
     }
 }

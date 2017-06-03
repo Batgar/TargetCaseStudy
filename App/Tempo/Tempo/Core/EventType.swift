@@ -14,6 +14,6 @@ public protocol EventType {
 
 public extension EventType {
     static var key: String {
-        return String(self.dynamicType)
+        return String(describing: type(of: self))
     }
 }

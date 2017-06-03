@@ -13,15 +13,15 @@ import Foundation
  */
 public struct TempoFocus: Equatable {
     public enum Position {
-        case CenteredHorizontally
-        case CenteredVertically
+        case centeredHorizontally
+        case centeredVertically
     }
 
-    public let indexPath: NSIndexPath
+    public let indexPath: IndexPath
     public let position: Position
     public let animated: Bool
 
-    public init(indexPath: NSIndexPath, position: Position, animated: Bool) {
+    public init(indexPath: IndexPath, position: Position, animated: Bool) {
         self.indexPath = indexPath
         self.position = position
         self.animated = animated

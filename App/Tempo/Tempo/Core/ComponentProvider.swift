@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ComponentProvider {
+open class ComponentProvider {
     let components: [ComponentType]
     let dispatcher: Dispatcher
 
@@ -17,13 +17,13 @@ public class ComponentProvider {
         self.dispatcher = dispatcher
     }
 
-    public func registerComponents(container: ReusableViewContainer) {
+    open func registerComponents(_ container: ReusableViewContainer) {
         for component in components {
             component.registerWrappers(container)
         }
     }
 
-    public func componentFor(item: TempoViewStateItem) -> ComponentType {
+    open func componentFor(_ item: TempoViewStateItem) -> ComponentType {
         for var component in components {
             if component.canDisplayItem(item) {
                 component.dispatcher = dispatcher

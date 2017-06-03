@@ -8,7 +8,7 @@
 
 import Foundation
 
-public func after(delay: NSTimeInterval, queue: dispatch_queue_t = dispatch_get_main_queue(), _ body: () -> Void) {
-    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
-    dispatch_after(time, queue, body)
+public func after(_ delay: TimeInterval, queue: DispatchQueue = DispatchQueue.main, _ body: @escaping () -> Void) {
+    let time = DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+    queue.asyncAfter(deadline: time, execute: body)
 }

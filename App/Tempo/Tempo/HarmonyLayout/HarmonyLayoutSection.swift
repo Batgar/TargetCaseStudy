@@ -20,23 +20,23 @@ import Foundation
  Per `SequenceType`, sections are destructively "consumed" by iteration, since the calculation
  of a given layout attributes can be dependent on previous iterations.
  */
-struct HarmonyLayoutSection: SequenceType {
+struct HarmonyLayoutSection: Sequence {
     let style: HarmonySectionStyle
-    let indexPaths: [NSIndexPath]
+    let indexPaths: [IndexPath]
     let layout: HarmonyLayout
 
-    init(indexPaths: [NSIndexPath], layout: HarmonyLayout, style: HarmonySectionStyle) {
+    init(indexPaths: [IndexPath], layout: HarmonyLayout, style: HarmonySectionStyle) {
         self.indexPaths = indexPaths
         self.layout = layout
         self.style = style
     }
 
-    func generate() -> AnyGenerator<HarmonyCellAttributes> {
+    func makeIterator() -> AnyIterator<HarmonyCellAttributes> {
         switch style {
         case .grid:
-            return AnyGenerator(HarmonyTileGenerator(layout: layout, indexPaths: indexPaths))
+            return AnyIterator(HarmonyTileGenerator(layout: layout, indexPaths: indexPaths))
         case .list:
-            return AnyGenerator(HarmonyCellGenerator(layout: layout, indexPaths: indexPaths))
+            return AnyIterator(HarmonyCellGenerator(layout: layout, indexPaths: indexPaths))
         }
     }
 }
@@ -48,7 +48,7 @@ extension HarmonyLayoutSection {
 
      - Parameter dy: The amount offset to offset in points.
      */
-    func offsetBy(dy: CGFloat) -> AnySequence<HarmonyCellAttributes> {
+    func offsetBy(_ dy: CGFloat) -> AnySequence<HarmonyCellAttributes> {
         return AnySequence(
             map { attributes in
                 let attrs = attributes.copy() as! HarmonyCellAttributes
@@ -59,10 +59,10 @@ extension HarmonyLayoutSection {
     }
 }
 
-protocol HarmonySectionGenerator: GeneratorType {
-    var indexPaths: [NSIndexPath] { get set }
+protocol HarmonySectionGenerator: IteratorProtocol {
+    var indexPaths: [IndexPath] { get set }
 
-    mutating func next(indexPath: NSIndexPath) -> HarmonyCellAttributes
+    mutating func next(_ indexPath: IndexPath) -> HarmonyCellAttributes
 }
 
 extension HarmonySectionGenerator {

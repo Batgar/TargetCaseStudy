@@ -8,12 +8,12 @@
 
 import UIKit
 
-@objc public class Accessibility : NSObject {
-    public static func announce(announcement: String) {
+@objc open class Accessibility : NSObject {
+    open static func announce(_ announcement: String) {
         UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, announcement)
     }
 
-    public static func announce(announcement: String, afterDelay delay: NSTimeInterval) {
+    open static func announce(_ announcement: String, afterDelay delay: TimeInterval) {
         after(delay) {
             announce(announcement)
         }
@@ -24,19 +24,19 @@ import UIKit
      *
      *  - Parameter announcement: An optional announcement to coincide with the layout change.
      */
-    public static func postLayoutChanged(announcement: String? = nil) {
+    open static func postLayoutChanged(_ announcement: String? = nil) {
         UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, announcement);
     }
 
-    public static func announceScreenChanged(andFocusView view: UIView) {
+    open static func announceScreenChanged(andFocusView view: UIView) {
         UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, view)
     }
 
-    public static func announceScreenChanged(andSpeakAnnouncement announcement: String) {
+    open static func announceScreenChanged(andSpeakAnnouncement announcement: String) {
         UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, announcement)
     }
     
-    public static func announceScreenChanged(andSpeakAnnouncement announcement: String, afterDelay delay: NSTimeInterval) {
+    open static func announceScreenChanged(andSpeakAnnouncement announcement: String, afterDelay delay: TimeInterval) {
         after(delay) {
             UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, announcement)
         }
@@ -48,7 +48,7 @@ public extension UIView {
         UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, self);
     }
 
-    func focusAccessibility(afterDelay delay: NSTimeInterval) {
+    func focusAccessibility(afterDelay delay: TimeInterval) {
         after(delay) {
             self.focusAccessibility()
         }

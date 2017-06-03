@@ -12,14 +12,14 @@ struct HarmonyTileGenerator: HarmonySectionGenerator {
     let layout: HarmonyLayout
 
     var grid = Grid(columns: 12)
-    var indexPaths: [NSIndexPath]
+    var indexPaths: [IndexPath]
 
-    init(layout: HarmonyLayout, indexPaths: [NSIndexPath]) {
+    init(layout: HarmonyLayout, indexPaths: [IndexPath]) {
         self.layout = layout
         self.indexPaths = indexPaths
     }
 
-    mutating func next(indexPath: NSIndexPath) -> HarmonyCellAttributes {
+    mutating func next(_ indexPath: IndexPath) -> HarmonyCellAttributes {
         let spacing = layout.tileSpacing(forIndexPath: indexPath)
         let insets = layout.tileInsets(forIndexPath: indexPath)
         let width = layout.width(forSection: indexPath.section)
@@ -31,10 +31,10 @@ struct HarmonyTileGenerator: HarmonySectionGenerator {
         let rect = grid.place(tile)
         let frame = projection.project(rect)
 
-        let attributes = HarmonyCellAttributes(forCellWithIndexPath: indexPath)
+        let attributes = HarmonyCellAttributes(forCellWith: indexPath)
 
         attributes.frame = frame
-        attributes.style = .None
+        attributes.style = .none
         attributes.margins = layout.tileMargins(forIndexPath: indexPath)
 
         return attributes

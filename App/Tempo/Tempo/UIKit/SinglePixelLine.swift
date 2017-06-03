@@ -8,21 +8,21 @@
 
 import UIKit
 
-public class SinglePixelLine: UIView {
+open class SinglePixelLine: UIView {
     
-    public var color: UIColor = UIColor.grayColor() {
+    open var color: UIColor = UIColor.gray {
         didSet {
             self.setNeedsDisplay()
         }
     }
     
-    public var edges: UIRectEdge = .Bottom {
+    open var edges: UIRectEdge = .bottom {
         didSet {
             self.setNeedsDisplay()
         }
     }
     
-    public var insets: UIEdgeInsets = UIEdgeInsetsZero {
+    open var insets: UIEdgeInsets = UIEdgeInsets.zero {
         didSet {
             self.setNeedsDisplay()
         }
@@ -38,52 +38,52 @@ public class SinglePixelLine: UIView {
         setup()
     }
     
-    public override func drawRect(rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         let lineWidth = HarmonyScreen.onePixel
         let lineInset = lineWidth / 2.0 // half the width of the line should be inside
         let insetRect = UIEdgeInsetsInsetRect(rect, insets)
         
-        let context = UIGraphicsGetCurrentContext()
-        CGContextSaveGState(context)
-        CGContextSetLineWidth(context, lineWidth)
-        CGContextSetStrokeColorWithColor(context, color.CGColor)
+        let context = UIGraphicsGetCurrentContext()!
+        context.saveGState()
+        context.setLineWidth(lineWidth)
+        context.setStrokeColor(color.cgColor)
         
-        if edges.contains(.Bottom)  {
-            let bottomY = CGRectGetMaxY(insetRect) - lineInset
-            CGContextMoveToPoint(context, insets.left, bottomY)
-            CGContextAddLineToPoint(context, CGRectGetMaxX(insetRect), bottomY)
-            CGContextStrokePath(context)
+        if edges.contains(.bottom)  {
+            let bottomY = insetRect.maxY - lineInset
+            context.move(to: CGPoint(x: insets.left, y: bottomY))
+            context.addLine(to: CGPoint(x: insetRect.maxX, y: bottomY))
+            context.strokePath()
         }
         
-        if edges.contains(.Left) {
+        if edges.contains(.left) {
             let leftX = insets.left + lineInset
-            CGContextMoveToPoint(context, leftX, insets.top)
-            CGContextAddLineToPoint(context, leftX, CGRectGetMaxY(insetRect))
-            CGContextStrokePath(context)
+            context.move(to: CGPoint(x: leftX, y: insets.top))
+            context.addLine(to: CGPoint(x: leftX, y: insetRect.maxY))
+            context.strokePath()
         }
         
-        if edges.contains(.Right) {
-            let rightX = CGRectGetMaxX(insetRect) - lineInset
-            CGContextMoveToPoint(context, rightX, insets.top)
-            CGContextAddLineToPoint(context, rightX, CGRectGetMaxY(insetRect))
-            CGContextStrokePath(context)
+        if edges.contains(.right) {
+            let rightX = insetRect.maxX - lineInset
+            context.move(to: CGPoint(x: rightX, y: insets.top))
+            context.addLine(to: CGPoint(x: rightX, y: insetRect.maxY))
+            context.strokePath()
         }
         
-        if edges.contains(.Top) {
+        if edges.contains(.top) {
             let topY = insets.top + lineInset
-            CGContextMoveToPoint(context, insets.left, topY)
-            CGContextAddLineToPoint(context, CGRectGetMaxX(insetRect), topY)
-            CGContextStrokePath(context)
+            context.move(to: CGPoint(x: insets.left, y: topY))
+            context.addLine(to: CGPoint(x: insetRect.maxX, y: topY))
+            context.strokePath()
         }
         
-        CGContextRestoreGState(context)
+        context.restoreGState()
     }
     
     // MARK: - Private Methods
     
-    private func setup() {
-        backgroundColor = UIColor.clearColor()
-        contentMode = .Redraw
+    fileprivate func setup() {
+        backgroundColor = UIColor.clear
+        contentMode = .redraw
     }
     
 }

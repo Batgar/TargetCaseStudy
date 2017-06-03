@@ -9,16 +9,16 @@
 import Foundation
 
 public protocol TempoPresenterType: class {
-    func present(viewState: TempoViewState)
+    func present(_ viewState: TempoViewState)
 }
 
 public protocol TempoPresenter: TempoPresenterType {
     associatedtype ViewState
-    func present(viewState: ViewState)
+    func present(_ viewState: ViewState)
 }
 
 extension TempoPresenter {
-    public func present(viewState: TempoViewState) {
+    public func present(_ viewState: TempoViewState) {
         if let viewState = viewState as? Self.ViewState {
             present(viewState)
         }

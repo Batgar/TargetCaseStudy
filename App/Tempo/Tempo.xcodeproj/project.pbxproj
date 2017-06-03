@@ -234,6 +234,7 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = D9LCY75JDG;
 						DevelopmentTeamName = Target;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};

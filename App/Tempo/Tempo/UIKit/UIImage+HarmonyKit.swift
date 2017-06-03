@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImage {
     convenience init?(namedFromBundle: String) {
-        self.init(named: namedFromBundle, inBundle: NSBundle(forClass: HarmonyCellBase.self), compatibleWithTraitCollection: nil)
+        self.init(named: namedFromBundle, in: Bundle(for: HarmonyCellBase.self), compatibleWith: nil)
     }
     
     public convenience init?(namedFromHarmonyKitBundle: String) {
@@ -18,22 +18,22 @@ extension UIImage {
     }
     
     @objc
-    public class func imageNamedFromHarmonyKitBundle(named: String) -> UIImage? {
+    public class func imageNamedFromHarmonyKitBundle(_ named: String) -> UIImage? {
         return UIImage(namedFromHarmonyKitBundle: named)
     }
     
-    public class func fromColor(color: UIColor) -> UIImage {
-        let rect = CGRectMake(0.0, 0.0, 1.0, 1.0)
+    public class func fromColor(_ color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
         UIGraphicsBeginImageContext(rect.size)
         
-        let context = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
         
-        return image
+        return image!
     }
     
     @nonobjc

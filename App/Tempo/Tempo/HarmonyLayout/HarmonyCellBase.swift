@@ -12,125 +12,125 @@ import UIKit
  *  Harmony styled cell for use in HarmonyLayout collection views. The cell supports multiple styles
  *  as defined in the designs.
  */
-public class HarmonyCellBase: UICollectionViewCell {
+open class HarmonyCellBase: UICollectionViewCell {
     // MARK: - Private Class Properties
     
     
-    private static var backgroundImageSolo: UIImage? = {
+    fileprivate static var backgroundImageSolo: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellBackgroundSolo")
         let capInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
     
-    private static var backgroundImageTop: UIImage? = {
+    fileprivate static var backgroundImageTop: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellBackgroundTop")
         let capInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 1.0, right: 5.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
     
-    private static var backgroundImageMiddle: UIImage? = {
+    fileprivate static var backgroundImageMiddle: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellBackgroundMiddle")
         let capInsets = UIEdgeInsets(top: 0.0, left: 1.0, bottom: 1.0, right: 1.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
     
-    private static var backgroundImageBottom: UIImage? = {
+    fileprivate static var backgroundImageBottom: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellBackgroundBottom")
         let capInsets = UIEdgeInsets(top: 0.0, left: 5.0, bottom: 5.0, right: 5.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
     
-    private static var backgroundImageHorizontalRule: UIImage? = {
+    fileprivate static var backgroundImageHorizontalRule: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellBackgroundHorizontalRule")
         let capInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
 
-    private static var backgroundImagePlainTop: UIImage? = {
+    fileprivate static var backgroundImagePlainTop: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellBackgroundPlainTop")
         let capInsets = UIEdgeInsets(top: 3.0, left: 0.0, bottom: 0.0, right: 0.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
 
-    private static var backgroundImagePlainMiddle: UIImage? = {
+    fileprivate static var backgroundImagePlainMiddle: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellBackgroundPlainMiddle")
         let capInsets = UIEdgeInsets(top: 2.0, left: 1.0, bottom: 0.0, right: 1.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
 
-    private static var backgroundImagePlainBottom: UIImage? = {
+    fileprivate static var backgroundImagePlainBottom: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellBackgroundPlainBottom")
         let capInsets = UIEdgeInsets(top: 1.0, left: 1.0, bottom: 2.0, right: 0.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
 
-    private static var backgroundImagePlainSolo: UIImage? = {
+    fileprivate static var backgroundImagePlainSolo: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellBackgroundPlainSolo")
         let capInsets = UIEdgeInsets(top: 2.0, left: 0.0, bottom: 1.0, right: 0.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
 
-    private static var highlightedBackgroundImageSolo: UIImage? = {
+    fileprivate static var highlightedBackgroundImageSolo: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellHighlightedBackgroundSolo")
         let capInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
     
-    private static var highlightedBackgroundImageTop: UIImage? = {
+    fileprivate static var highlightedBackgroundImageTop: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellHighlightedBackgroundTop")
         let capInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 1.0, right: 5.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
     
-    private static var highlightedBackgroundImageMiddle: UIImage? = {
+    fileprivate static var highlightedBackgroundImageMiddle: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellHighlightedBackgroundMiddle")
         let capInsets = UIEdgeInsets(top: 0.0, left: 1.0, bottom: 1.0, right: 1.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
     
-    private static var highlightedBackgroundImageBottom: UIImage? = {
+    fileprivate static var highlightedBackgroundImageBottom: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellHighlightedBackgroundBottom")
         let capInsets = UIEdgeInsets(top: 0.0, left: 5.0, bottom: 5.0, right: 5.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
     
-    private static var highlightedBackgroundImageHorizontalRule: UIImage? = {
+    fileprivate static var highlightedBackgroundImageHorizontalRule: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellHighlightedBackgroundHorizontalRule")
         let capInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 1.0, right: 0.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
 
-    private static var highlightedBackgroundImagePlainTop: UIImage? = {
+    fileprivate static var highlightedBackgroundImagePlainTop: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellHighlightedBackgroundPlainTop")
         let capInsets = UIEdgeInsets(top: 3.0, left: 0.0, bottom: 0.0, right: 0.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
 
-    private static var highlightedBackgroundImagePlainMiddle: UIImage? = {
+    fileprivate static var highlightedBackgroundImagePlainMiddle: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellHighlightedBackgroundPlainMiddle")
         let capInsets = UIEdgeInsets(top: 3.0, left: 1.0, bottom: 0.0, right: 0.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
 
-    private static var highlightedBackgroundImagePlainBottom: UIImage? = {
+    fileprivate static var highlightedBackgroundImagePlainBottom: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellHighlightedBackgroundPlainBottom")
         let capInsets = UIEdgeInsets(top: 1.0, left: 1.0, bottom: 2.0, right: 0.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
 
-    private static var highlightedBackgroundImagePlainSolo: UIImage? = {
+    fileprivate static var highlightedBackgroundImagePlainSolo: UIImage? = {
         let image = UIImage(namedFromBundle: "HarmonyCellHighlightedBackgroundPlainSolo")
         let capInsets = UIEdgeInsets(top: 2.0, left: 1.0, bottom: 1.0, right: 0.0)
-        return image?.resizableImageWithCapInsets(capInsets)
+        return image?.resizableImage(withCapInsets: capInsets)
     }()
 
     // MARK: - Private Properties
     
-    private var backgroundImageView: UIImageView?
-    private var highlightedBackgroundImageView: UIImageView?
-    private var singlePixelLine: SinglePixelLine?
-    private let highlightedForegroundImageView: UIImageView = UIImageView()
-    private var highlightStyle: HarmonyHighlightStyle = .background
+    fileprivate var backgroundImageView: UIImageView?
+    fileprivate var highlightedBackgroundImageView: UIImageView?
+    fileprivate var singlePixelLine: SinglePixelLine?
+    fileprivate let highlightedForegroundImageView: UIImageView = UIImageView()
+    fileprivate var highlightStyle: HarmonyHighlightStyle = .background
     
     // MARK: - Internal Functions
     
@@ -146,27 +146,27 @@ public class HarmonyCellBase: UICollectionViewCell {
     
     // MARK: - Private Functions
     
-    private func setup(frame frame: CGRect) {
-        contentView.layoutMargins = UIEdgeInsetsZero
+    fileprivate func setup(frame: CGRect) {
+        contentView.layoutMargins = UIEdgeInsets.zero
 
         backgroundView = UIView(frame: frame)
-        backgroundView?.backgroundColor = .clearColor()
+        backgroundView?.backgroundColor = .clear
 
         backgroundImageView = UIImageView(image: HarmonyCellBase.backgroundImageSolo)
-        backgroundImageView?.backgroundColor = .clearColor()
+        backgroundImageView?.backgroundColor = .clear
         backgroundView?.addSubview(backgroundImageView!)
         
         highlightedBackgroundImageView = UIImageView(image: HarmonyCellBase.highlightedBackgroundImageSolo)
-        highlightedBackgroundImageView?.backgroundColor = .clearColor()
-        highlightedBackgroundImageView?.hidden = true
+        highlightedBackgroundImageView?.backgroundColor = .clear
+        highlightedBackgroundImageView?.isHidden = true
         backgroundView?.addSubview(highlightedBackgroundImageView!)
 
         singlePixelLine = SinglePixelLine(frame: frame)
-        singlePixelLine?.edges = .None
+        singlePixelLine?.edges = UIRectEdge()
         backgroundView?.addSubview(singlePixelLine!)
 
-        highlightedForegroundImageView.backgroundColor = UIColor.targetJetBlackColor.colorWithAlphaComponent(0.03)
-        highlightedForegroundImageView.hidden = true
+        highlightedForegroundImageView.backgroundColor = UIColor.targetJetBlackColor.withAlphaComponent(0.03)
+        highlightedForegroundImageView.isHidden = true
         contentView.addSubview(highlightedForegroundImageView)
     }
 }
@@ -174,96 +174,96 @@ public class HarmonyCellBase: UICollectionViewCell {
 // MARK: - UICollectionViewCell
 
 public extension HarmonyCellBase {
-    public override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    open override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         // This override prevents self-sizing operations from taking place, which slow down complex layouts.
         return layoutAttributes
     }
 
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.applyLayoutAttributes(layoutAttributes)
+    override open func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
 
         if let attributes = layoutAttributes as? HarmonyCellAttributes {
             contentView.layoutMargins = attributes.margins
             highlightStyle = attributes.highlightStyle
 
             switch attributes.style {
-            case .None:
-                backgroundColor = .clearColor()
-                backgroundImageView?.hidden = true
+            case .none:
+                backgroundColor = .clear
+                backgroundImageView?.isHidden = true
                 highlightedBackgroundImageView?.image = nil
-                singlePixelLine?.edges = .None
-            case .Grouped:
-                backgroundColor = .clearColor()
-                backgroundImageView?.hidden = false
+                singlePixelLine?.edges = UIRectEdge()
+            case .grouped:
+                backgroundColor = .clear
+                backgroundImageView?.isHidden = false
                 
                 switch attributes.position {
-                case .Solo:
+                case .solo:
                     backgroundImageView?.image = HarmonyCellBase.backgroundImageSolo
                     highlightedBackgroundImageView?.image = HarmonyCellBase.highlightedBackgroundImageSolo
 
-                    singlePixelLine?.edges = .None
-                case .Top:
+                    singlePixelLine?.edges = UIRectEdge()
+                case .top:
                     backgroundImageView?.image = HarmonyCellBase.backgroundImageTop
                     highlightedBackgroundImageView?.image = HarmonyCellBase.highlightedBackgroundImageTop
                     
-                    singlePixelLine?.edges = .Bottom
+                    singlePixelLine?.edges = .bottom
                     singlePixelLine?.insets = attributes.separatorInsets
                     
-                case .Middle:
+                case .middle:
                     backgroundImageView?.image = HarmonyCellBase.backgroundImageMiddle
                     highlightedBackgroundImageView?.image = HarmonyCellBase.highlightedBackgroundImageMiddle
                     
-                    singlePixelLine?.edges = .Bottom
+                    singlePixelLine?.edges = .bottom
                     singlePixelLine?.insets = attributes.separatorInsets
                     
-                case .Bottom:
+                case .bottom:
                     backgroundImageView?.image = HarmonyCellBase.backgroundImageBottom
                     highlightedBackgroundImageView?.image = HarmonyCellBase.highlightedBackgroundImageBottom
 
-                    singlePixelLine?.edges = .None
+                    singlePixelLine?.edges = UIRectEdge()
                 }
                 
-            case .Detached:
-                backgroundColor = .clearColor()
-                backgroundImageView?.hidden = false
+            case .detached:
+                backgroundColor = .clear
+                backgroundImageView?.isHidden = false
                 backgroundImageView?.image = HarmonyCellBase.backgroundImageSolo
                 highlightedBackgroundImageView?.image = HarmonyCellBase.highlightedBackgroundImageSolo
-                singlePixelLine?.edges = .None
-            case .HorizontalRule:
-                backgroundColor = .clearColor()
-                backgroundImageView?.hidden = false
+                singlePixelLine?.edges = UIRectEdge()
+            case .horizontalRule:
+                backgroundColor = .clear
+                backgroundImageView?.isHidden = false
                 backgroundImageView?.image = HarmonyCellBase.backgroundImageHorizontalRule
                 highlightedBackgroundImageView?.image = HarmonyCellBase.highlightedBackgroundImageHorizontalRule
-                singlePixelLine?.edges = .None
-            case .Plain:
-                backgroundColor = .whiteColor()
-                backgroundImageView?.hidden = false
+                singlePixelLine?.edges = UIRectEdge()
+            case .plain:
+                backgroundColor = .white
+                backgroundImageView?.isHidden = false
                 singlePixelLine?.insets = attributes.separatorInsets
 
                 switch attributes.position {
-                case .Solo:
+                case .solo:
                     backgroundImageView?.image = HarmonyCellBase.backgroundImagePlainSolo
                     highlightedBackgroundImageView?.image = HarmonyCellBase.highlightedBackgroundImagePlainSolo
-                    singlePixelLine?.edges = .None
-                case .Top:
+                    singlePixelLine?.edges = UIRectEdge()
+                case .top:
                     backgroundImageView?.image = HarmonyCellBase.backgroundImagePlainTop
                     highlightedBackgroundImageView?.image = HarmonyCellBase.highlightedBackgroundImagePlainTop
-                    singlePixelLine?.edges = .Bottom
-                case .Middle:
+                    singlePixelLine?.edges = .bottom
+                case .middle:
                     backgroundImageView?.image = HarmonyCellBase.backgroundImagePlainMiddle
                     highlightedBackgroundImageView?.image = HarmonyCellBase.highlightedBackgroundImagePlainMiddle
-                    singlePixelLine?.edges = .Bottom
-                case .Bottom:
+                    singlePixelLine?.edges = .bottom
+                case .bottom:
                     backgroundImageView?.image = HarmonyCellBase.backgroundImagePlainBottom
                     highlightedBackgroundImageView?.image = HarmonyCellBase.highlightedBackgroundImagePlainBottom
-                    singlePixelLine?.edges = .None
+                    singlePixelLine?.edges = UIRectEdge()
                 }
 
             }
         } else {
-            layoutMargins = UIEdgeInsetsZero
-            backgroundColor = .clearColor()
-            backgroundImageView?.hidden = true
+            layoutMargins = UIEdgeInsets.zero
+            backgroundColor = .clear
+            backgroundImageView?.isHidden = true
             highlightedBackgroundImageView?.image = nil
         }
 
@@ -271,7 +271,7 @@ public extension HarmonyCellBase {
         layoutIfNeeded()
     }
 
-    override func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         backgroundImageView?.frame = contentView.frame
         highlightedBackgroundImageView?.frame = contentView.frame
@@ -279,14 +279,14 @@ public extension HarmonyCellBase {
         highlightedForegroundImageView.frame = contentView.bounds
     }
     
-    override var highlighted: Bool {
+    override open var isHighlighted: Bool {
         didSet {
             switch highlightStyle {
             case .foreground:
-                contentView.bringSubviewToFront(highlightedForegroundImageView)
-                highlightedForegroundImageView.hidden = !highlighted
+                contentView.bringSubview(toFront: highlightedForegroundImageView)
+                highlightedForegroundImageView.isHidden = !isHighlighted
             case .background:
-                highlightedBackgroundImageView?.hidden = !highlighted
+                highlightedBackgroundImageView?.isHidden = !isHighlighted
             }
         }
     }
@@ -300,15 +300,15 @@ public extension HarmonyCellBase {
 @objc
 public enum HarmonyCellStyle: Int {
     /// No border, transparent background.
-    case None
+    case none
     /// Rounded corners, white background, looks like a grouped table view.
-    case Grouped
+    case grouped
     /// In a grouped table view, detached from neighboring cells by a narrow margin.
-    case Detached
+    case detached
     /// 1-point bottom border, no rounded corners, white background.
-    case HorizontalRule
+    case horizontalRule
     /// Plain rectangular white cells, with 1-point separators.
-    case Plain
+    case plain
 }
 
 /**
@@ -335,14 +335,14 @@ public enum HarmonyTileSize: Int {
 
     public var dimensions: (columns: Int, rows: Int) {
         switch self {
-        case carouselSmall: return (columns: 5, rows: 5)
-        case carouselTall:  return (columns: 5, rows: 8)
-        case mini:  return (columns: 4,  rows: 5)
-        case small: return (columns: 6,  rows: 5)
-        case wide:  return (columns: 12, rows: 5)
-        case tall:  return (columns: 6,  rows: 10)
-        case big:   return (columns: 12, rows: 10)
-        case giant: return (columns: 12, rows: 15)
+        case .carouselSmall: return (columns: 5, rows: 5)
+        case .carouselTall:  return (columns: 5, rows: 8)
+        case .mini:  return (columns: 4,  rows: 5)
+        case .small: return (columns: 6,  rows: 5)
+        case .wide:  return (columns: 12, rows: 5)
+        case .tall:  return (columns: 6,  rows: 10)
+        case .big:   return (columns: 12, rows: 10)
+        case .giant: return (columns: 12, rows: 15)
         }
     }
 }
@@ -365,8 +365,8 @@ public enum HarmonySectionStyle: Int {
  - Bottom: It's at the bottom.
  */
 public enum HarmonyCellPosition {
-    case Solo
-    case Top
-    case Middle
-    case Bottom
+    case solo
+    case top
+    case middle
+    case bottom
 }

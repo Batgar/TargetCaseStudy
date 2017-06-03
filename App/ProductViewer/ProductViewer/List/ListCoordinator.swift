@@ -22,13 +22,13 @@ class ListCoordinator: TempoCoordinator {
         }
     }
     
-    private var viewState: ListViewState {
+    fileprivate var viewState: ListViewState {
         didSet {
             updateUI()
         }
     }
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         for presenter in presenters {
             presenter.present(viewState)
         }
@@ -50,11 +50,11 @@ class ListCoordinator: TempoCoordinator {
     
     // MARK: ListCoordinator
     
-    private func registerListeners() {
+    fileprivate func registerListeners() {
         dispatcher.addObserver(ListItemPressed.self) { [weak self] e in
-            let alert = UIAlertController(title: "Item selected!", message: "🐶", preferredStyle: .Alert)
-            alert.addAction( UIAlertAction(title: "OK", style: .Cancel, handler: nil) )
-            self?.viewController.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Item selected!", message: "🐶", preferredStyle: .alert)
+            alert.addAction( UIAlertAction(title: "OK", style: .cancel, handler: nil) )
+            self?.viewController.present(alert, animated: true, completion: nil)
         }
     }
     

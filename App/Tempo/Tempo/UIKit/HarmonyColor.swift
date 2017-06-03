@@ -3,11 +3,11 @@ import UIKit
 
 // MARK: - Color Builders
 
-private func colorWithHSB(h h: CGFloat, s: CGFloat, b: CGFloat) -> UIColor {
+private func colorWithHSB(h: CGFloat, s: CGFloat, b: CGFloat) -> UIColor {
     return UIColor(hue: h / 360.0, saturation: s / 100.0, brightness: b / 100.0, alpha: 1.0)
 }
 
-private func colorWithRGB(r r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
+private func colorWithRGB(r: CGFloat, g: CGFloat, b: CGFloat) -> UIColor {
     return UIColor(red: r, green: g, blue: b, alpha: 1.0)
 }
 

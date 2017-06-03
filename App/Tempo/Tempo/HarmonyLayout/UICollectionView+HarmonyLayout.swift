@@ -11,9 +11,9 @@ import Foundation
 /// Reference type for holding onto the views to be removed
 class HarmonyLayoutHideViewHandle {
     
-    private let appliedMaskViews: Set<UIView>
+    fileprivate let appliedMaskViews: Set<UIView>
     
-    private init(views: Set<UIView>) {
+    fileprivate init(views: Set<UIView>) {
         self.appliedMaskViews = views
     }
     
@@ -27,7 +27,7 @@ class HarmonyLayoutHideViewHandle {
 extension UICollectionView {
     
     /// Masks all "groups" in a section.
-    func maskSection(section: Int) -> HarmonyLayoutHideViewHandle {
+    func maskSection(_ section: Int) -> HarmonyLayoutHideViewHandle {
         var appliedMaskViews: Set<UIView> = []
         
         guard   let harmonyLayout = collectionViewLayout as? HarmonyLayout,
@@ -38,16 +38,16 @@ extension UICollectionView {
         
         for groupFrame in groupFrames {
             let maskView = UIView(frame: groupFrame)
-            let activity = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-            activity.center = CGPoint(x: CGRectGetMidX(maskView.bounds), y: CGRectGetMidY(maskView.bounds))
+            let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            activity.center = CGPoint(x: maskView.bounds.midX, y: maskView.bounds.midY)
             activity.startAnimating()
             maskView.addSubview(activity)
             addSubview(maskView)
             maskView.layer.cornerRadius = 5
-            maskView.layer.backgroundColor = UIColor.clearColor().CGColor
-            UIView.animateWithDuration(0.2) {
-                maskView.layer.backgroundColor = UIColor.targetStarkWhiteColor.colorWithAlphaComponent(0.4).CGColor
-            }
+            maskView.layer.backgroundColor = UIColor.clear.cgColor
+            UIView.animate(withDuration: 0.2, animations: {
+                maskView.layer.backgroundColor = UIColor.targetStarkWhiteColor.withAlphaComponent(0.4).cgColor
+            }) 
             
             // Store for later so it can be removed
             appliedMaskViews.insert(maskView)

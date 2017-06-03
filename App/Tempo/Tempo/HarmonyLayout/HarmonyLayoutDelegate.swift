@@ -22,7 +22,7 @@ public protocol HarmonyLayoutDelegate: UICollectionViewDelegate {
      
      - Returns: The height of the specified item.
      */
-    optional func harmonyLayout(harmonyLayout: HarmonyLayout, heightForItemAtIndexPath indexPath: NSIndexPath, forWidth: CGFloat) -> CGFloat
+    @objc optional func harmonyLayout(_ harmonyLayout: HarmonyLayout, heightForItemAtIndexPath indexPath: IndexPath, forWidth: CGFloat) -> CGFloat
     
     /**
      Asks the delegate for the margins for the specified section. If this function isn't specified,
@@ -33,7 +33,7 @@ public protocol HarmonyLayoutDelegate: UICollectionViewDelegate {
      
      - Returns: The margins for the specified section.
      */
-    optional func harmonyLayout(harmonyLayout: HarmonyLayout, marginsForSection section: Int) -> HarmonyLayoutMargins
+    @objc optional func harmonyLayout(_ harmonyLayout: HarmonyLayout, marginsForSection section: Int) -> HarmonyLayoutMargins
     
     /**
      Asks the delegate for the margins for the specified item. If this function isn't specified,
@@ -44,7 +44,7 @@ public protocol HarmonyLayoutDelegate: UICollectionViewDelegate {
      
      - Returns: The margins for the specified item.
      */
-    optional func harmonyLayout(harmonyLayout: HarmonyLayout, marginsForItemAtIndexPath indexPath: NSIndexPath) -> HarmonyLayoutMargins
+    @objc optional func harmonyLayout(_ harmonyLayout: HarmonyLayout, marginsForItemAtIndexPath indexPath: IndexPath) -> HarmonyLayoutMargins
     
     /**
      Asks the delegate for the separator inset of the item at the specified index path. If this function isn't
@@ -55,7 +55,7 @@ public protocol HarmonyLayoutDelegate: UICollectionViewDelegate {
      
      - Returns: The separator insets for specified item.
      */
-    optional func harmonyLayout(harmonyLayout: HarmonyLayout, separatorInsetsForItemAtIndexPath indexPath: NSIndexPath) -> UIEdgeInsets
+    @objc optional func harmonyLayout(_ harmonyLayout: HarmonyLayout, separatorInsetsForItemAtIndexPath indexPath: IndexPath) -> UIEdgeInsets
     
     /**
      Asks the delegate for the style of the item at the specified index path. If this function isn't
@@ -66,7 +66,7 @@ public protocol HarmonyLayoutDelegate: UICollectionViewDelegate {
      
      - Returns: The style for specified item.
      */
-    optional func harmonyLayout(harmonyLayout: HarmonyLayout, styleForItemAtIndexPath indexPath: NSIndexPath) -> HarmonyCellStyle
+    @objc optional func harmonyLayout(_ harmonyLayout: HarmonyLayout, styleForItemAtIndexPath indexPath: IndexPath) -> HarmonyCellStyle
     
     /**
      Asks the delegate if there should be a line break after the provided index path in a grouped 
@@ -77,7 +77,7 @@ public protocol HarmonyLayoutDelegate: UICollectionViewDelegate {
      
      - Returns: A boolean indicating if there should be a break after the provided index path.
      */
-    optional func harmonyLayout(harmonyLayout: HarmonyLayout, breakAtIndexPath indexPath: NSIndexPath) -> Bool
+    @objc optional func harmonyLayout(_ harmonyLayout: HarmonyLayout, breakAtIndexPath indexPath: IndexPath) -> Bool
 
     /**
      Asks the delegate for the style of the specified section. If this function isn't specified then
@@ -88,7 +88,7 @@ public protocol HarmonyLayoutDelegate: UICollectionViewDelegate {
 
      - Returns: The style for the specified section. See `HarmonySectionStyle` for possible values.
      */
-    optional func harmonyLayout(harmonyLayout: HarmonyLayout, styleForSection section: Int) -> HarmonySectionStyle
+    @objc optional func harmonyLayout(_ harmonyLayout: HarmonyLayout, styleForSection section: Int) -> HarmonySectionStyle
 
     /**
      Asks the delegate for the tile size of the specified item. If this function isn't specified, then
@@ -99,7 +99,7 @@ public protocol HarmonyLayoutDelegate: UICollectionViewDelegate {
 
      - Returns: The tile size of the specified item. See `HarmonyTileSize` for possible values.
      */
-    optional func harmonyLayout(harmonyLayout: HarmonyLayout, tileSizeForItemAtIndexPath indexPath: NSIndexPath) -> HarmonyTileSize
+    @objc optional func harmonyLayout(_ harmonyLayout: HarmonyLayout, tileSizeForItemAtIndexPath indexPath: IndexPath) -> HarmonyTileSize
 
     /**
      Asks the delegate for the tile insets of the item at the specified index path. If this function isn't
@@ -112,7 +112,7 @@ public protocol HarmonyLayoutDelegate: UICollectionViewDelegate {
 
      - Returns: The tile insets for the specified item.
      */
-    optional func harmonyLayout(harmonyLayout: HarmonyLayout, tileInsetsForItemAtIndexPath indexPath: NSIndexPath) -> UIEdgeInsets
+    @objc optional func harmonyLayout(_ harmonyLayout: HarmonyLayout, tileInsetsForItemAtIndexPath indexPath: IndexPath) -> UIEdgeInsets
 
     /**
      Asks the delegate for the spacing between items at the specified index path. If this function isn't
@@ -125,7 +125,7 @@ public protocol HarmonyLayoutDelegate: UICollectionViewDelegate {
 
      - Returns: The tile spacing for the specified item.
      */
-    optional func harmonyLayout(harmonyLayout: HarmonyLayout, tileSpacingForItemAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    @objc optional func harmonyLayout(_ harmonyLayout: HarmonyLayout, tileSpacingForItemAtIndexPath indexPath: IndexPath) -> CGFloat
 
     /**
      Asks the delegate for the tile margins of the item at the specified index path. If this function isn't
@@ -138,7 +138,7 @@ public protocol HarmonyLayoutDelegate: UICollectionViewDelegate {
 
      - Returns: The tile margins for the specified item.
      */
-    optional func harmonyLayout(harmonyLayout: HarmonyLayout, tileMarginsForItemAtIndexPath indexPath: NSIndexPath) -> UIEdgeInsets
+    @objc optional func harmonyLayout(_ harmonyLayout: HarmonyLayout, tileMarginsForItemAtIndexPath indexPath: IndexPath) -> UIEdgeInsets
 }
 
 

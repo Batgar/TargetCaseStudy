@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension SequenceType {
-    func detect(selectElement: (Generator.Element) -> Bool) -> Generator.Element? {
+extension Sequence {
+    func detect(_ selectElement: (Iterator.Element) -> Bool) -> Iterator.Element? {
         for element in self {
             if selectElement(element) {
                 return element

@@ -33,7 +33,7 @@ public struct GridProjection {
 
     // MARK: Lifecycle methodds
 
-    public init(width: CGFloat, columns: Int = 12, spacing: CGFloat = 0.0, insets: UIEdgeInsets = UIEdgeInsetsZero) {
+    public init(width: CGFloat, columns: Int = 12, spacing: CGFloat = 0.0, insets: UIEdgeInsets = UIEdgeInsets.zero) {
         self.width = width
         self.columns = columns
         self.spacing = spacing
@@ -58,7 +58,7 @@ public struct GridProjection {
         return insets.top + CGFloat(row) * rowHeight + CGFloat(row) * spacing
     }
 
-    public func project(rect: Grid.Rect) -> CGRect {
+    public func project(_ rect: Grid.Rect) -> CGRect {
         return CGRect(
             x: position(forColumn: rect.x),
             y: position(forRow: rect.y),
@@ -69,15 +69,15 @@ public struct GridProjection {
 
     // MARK: Private methods
 
-    private var rowHeight: CGFloat {
+    fileprivate var rowHeight: CGFloat {
         return (width - CGFloat(columns - 1) * spacing) / CGFloat(columns)
     }
 
-    private var contentWidth: CGFloat {
+    fileprivate var contentWidth: CGFloat {
         return width - insets.left - insets.right
     }
 
-    private var columnWidth: CGFloat {
+    fileprivate var columnWidth: CGFloat {
         return (contentWidth - CGFloat(columns - 1) * spacing) / CGFloat(columns)
     }
 }

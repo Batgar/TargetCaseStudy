@@ -12,26 +12,26 @@ struct HarmonyCellGenerator: HarmonySectionGenerator {
     let layout: HarmonyLayout
     let itemCount: Int
 
-    var indexPaths: [NSIndexPath]
+    var indexPaths: [IndexPath]
     var y: CGFloat = 0
 
-    init(layout: HarmonyLayout, indexPaths: [NSIndexPath]) {
+    init(layout: HarmonyLayout, indexPaths: [IndexPath]) {
         self.layout = layout
         self.indexPaths = indexPaths
         self.itemCount = indexPaths.count
     }
 
-    func predecessor(indexPath: NSIndexPath) -> NSIndexPath? {
+    func predecessor(_ indexPath: IndexPath) -> IndexPath? {
         let isFirstItem = indexPath.item == 0
-        return isFirstItem ? nil : NSIndexPath(forItem: indexPath.item - 1, inSection: indexPath.section)
+        return isFirstItem ? nil : IndexPath(item: indexPath.item - 1, section: indexPath.section)
     }
 
-    func successor(indexPath: NSIndexPath) -> NSIndexPath? {
+    func successor(_ indexPath: IndexPath) -> IndexPath? {
         let isLastItem = indexPath.item == itemCount - 1
-        return isLastItem ? nil : NSIndexPath(forItem: indexPath.item + 1, inSection: indexPath.section)
+        return isLastItem ? nil : IndexPath(item: indexPath.item + 1, section: indexPath.section)
     }
 
-    mutating func next(indexPath: NSIndexPath) -> HarmonyCellAttributes {
+    mutating func next(_ indexPath: IndexPath) -> HarmonyCellAttributes {
         let style = layout.style(forItemAtIndexPath: indexPath)
 
         let previousIndexPath = predecessor(indexPath)
@@ -56,13 +56,13 @@ struct HarmonyCellGenerator: HarmonySectionGenerator {
         let position: HarmonyCellPosition
 
         if isSoloItem {
-            position = .Solo
+            position = .solo
         } else if isFirstItem || (isMiddleItem && previousItemIsDetached) {
-            position = .Top
+            position = .top
         } else if isLastItem || (isMiddleItem && nextItemIsDetached) {
-            position = .Bottom
+            position = .bottom
         } else {
-            position = .Middle
+            position = .middle
         }
 
         let separatorInsets = layout.separatorInsets(forItemAtIndexPath: indexPath)
@@ -70,7 +70,7 @@ struct HarmonyCellGenerator: HarmonySectionGenerator {
         let topMargin: CGFloat
         if (!isFirstItem && isDetached) || (!isDetached && previousItemIsDetached) {
             // Add top margin for detached items.
-            topMargin = HarmonyLayoutMarginStyle.Narrow.points
+            topMargin = HarmonyLayoutMarginStyle.narrow.points
         } else {
             topMargin = 0
         }
@@ -78,9 +78,9 @@ struct HarmonyCellGenerator: HarmonySectionGenerator {
         let leftMargin = layout.margins(forSection: indexPath.section).left.points + layout.margins(forItemAtIndexPath: indexPath).left.points
 
         let width = layout.width(forItemAtIndexPath: indexPath)
-        let height = layout.height(forItemAtIndexPath: indexPath, width: width) + (style == .HorizontalRule ? 1 : 0)
+        let height = layout.height(forItemAtIndexPath: indexPath, width: width) + (style == .horizontalRule ? 1 : 0)
 
-        let attributes = HarmonyCellAttributes(forCellWithIndexPath: indexPath)
+        let attributes = HarmonyCellAttributes(forCellWith: indexPath)
 
         attributes.frame = CGRect(x: leftMargin, y: y + topMargin, width: width, height: height)
         attributes.position = position
@@ -93,8 +93,8 @@ struct HarmonyCellGenerator: HarmonySectionGenerator {
     }
 
     // Detached if the style is detached, or delegate indicates that there is a break.
-    func determineIfDetached(style: HarmonyCellStyle?, indexPath: NSIndexPath?) -> Bool {
-        if style == .Detached {
+    func determineIfDetached(_ style: HarmonyCellStyle?, indexPath: IndexPath?) -> Bool {
+        if style == .detached {
             return true
         } else if let indexPath = indexPath {
             return layout.hasBreak(atIndexPath: indexPath)

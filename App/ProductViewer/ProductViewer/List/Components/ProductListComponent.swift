@@ -13,6 +13,16 @@ struct ProductListComponent: Component {
 
     func prepareView(_ view: ProductListView, item: ListItemViewState) {
         // Called on first view or ProductListView
+        
+        
+        //Initialize our rounded rect for the cell.
+        // corner radius
+        view.layer.cornerRadius = 10
+        
+        // border
+        view.layer.borderWidth = 1.0
+        view.layer.borderColor = UIColor.lightGray.cgColor
+
     }
     
     func configureView(_ view: ProductListView, item: ListItemViewState) {

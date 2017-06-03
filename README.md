@@ -5,6 +5,8 @@ You have been given an proof-of-concept iOS project that displays, simply, a lis
 
 ##### Instructions
 
+Please complete all of the following:
+
 1. Fix up the deals list to (as best as you can) match the mockups shown in DealsList.png.
 2. Instead of displaying an alert when a deal is selected, instead present a new view that displays details on the view. Use the mockups shown in DealsDetails.png.
 3. The deals are currently hardcoded. Use the API at https://target-deals.herokuapp.com (this may be slow to load) to grab the real deals to display in the app.

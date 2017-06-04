@@ -23,6 +23,7 @@ struct ProductListComponent: Component {
         view.layer.borderWidth = 1.0
         view.layer.borderColor = UIColor.lightGray.cgColor
 
+        
     }
     
     func configureView(_ view: ProductListView, item: ListItemViewState) {
@@ -40,7 +41,22 @@ struct ProductListComponent: Component {
         }
         
         //No matter what load a possible place holder image given to us...
+        //It may get overwritten by the above completion handler for an async image load, but that is OK.
         view.productImage.image = item.image
+        
+        //https://stackoverflow.com/a/19443609
+        view.aisleLabel.text = item.aisle
+        
+        view.aisleLabel.layer.cornerRadius = view.aisleLabel.bounds.size.height / 2
+        view.aisleLabel.layer.borderWidth = 1.0
+        view.aisleLabel.layer.borderColor = UIColor.lightGray.cgColor
+        
+        let attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string:"ship", attributes:[NSForegroundColorAttributeName : UIColor.black]))
+        attributedString.append(NSAttributedString(string:" or", attributes: [NSForegroundColorAttributeName:UIColor.lightGray]))
+        view.beforeAisleLabel.attributedText = attributedString
+        
+    
     }
     
     func selectView(_ view: ProductListView, item: ListItemViewState) {
@@ -50,6 +66,6 @@ struct ProductListComponent: Component {
 
 extension ProductListComponent: HarmonyLayoutComponent {
     func heightForLayout(_ layout: HarmonyLayout, item: TempoViewStateItem, width: CGFloat) -> CGFloat {
-        return 100.0
+        return 120.0
     }
 }

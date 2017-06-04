@@ -70,21 +70,21 @@ class ListCoordinator: TempoCoordinator {
                 
                 if dealRoot.isEmpty {
                     self.viewState.listItems = [
-                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil)
+                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil, aisle:"")
                     ]
                     return
                 }
                 
                 guard let deals = dealRoot.deals else {
                     self.viewState.listItems = [
-                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil)
+                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil, aisle:"")
                     ]
                     return
                 }
                 
                 if deals.count <= 0 {
                     self.viewState.listItems = [
-                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil)
+                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil, aisle:"")
                     ]
                     return
                 }
@@ -94,9 +94,10 @@ class ListCoordinator: TempoCoordinator {
                 
                 self.viewState.listItems = deals.map { deal in
                     
-                    var image = UIImage(named:"0") //Default or 'error' image.
+                    //This may be a placeholder image if there is no URL in deal.image....
+                    let image = UIImage(named:"0") //Default or 'error' image.
                     
-                    return ListItemViewState(title: deal.title, price: deal.price, image: image, url: deal.image)
+                    return ListItemViewState(title: deal.title, price: deal.price, image: image, url: deal.image, aisle:deal.aisle.uppercased())
                 }
                 
                 self.dispatcher.triggerEvent(ListItemReady())

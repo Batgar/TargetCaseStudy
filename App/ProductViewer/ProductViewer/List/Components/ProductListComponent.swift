@@ -13,12 +13,50 @@ struct ProductListComponent: Component {
 
     func prepareView(_ view: ProductListView, item: ListItemViewState) {
         // Called on first view or ProductListView
+        
+        
+        //Initialize our rounded rect for the cell.
+        // corner radius
+        view.layer.cornerRadius = 10
+        
+        // border
+        view.layer.borderWidth = 1.0
+        view.layer.borderColor = UIColor.lightGray.cgColor
+
+        
     }
     
     func configureView(_ view: ProductListView, item: ListItemViewState) {
         view.titleLabel.text = item.title
         view.priceLabel.text = item.price
+        
+        if let imageURL = item.url {
+            UIImage.loadFromURL(url: imageURL) {
+                asyncLoadedImage in
+                DispatchQueue.main.async {
+                    //This may replace any place holder image loaded below.
+                    view.productImage.image = asyncLoadedImage
+                }
+            }
+        }
+        
+        //No matter what load a possible place holder image given to us...
+        //It may get overwritten by the above completion handler for an async image load, but that is OK.
         view.productImage.image = item.image
+        
+        //https://stackoverflow.com/a/19443609
+        view.aisleLabel.text = item.aisle
+        
+        view.aisleLabel.layer.cornerRadius = view.aisleLabel.bounds.size.height / 2
+        view.aisleLabel.layer.borderWidth = 1.0
+        view.aisleLabel.layer.borderColor = UIColor.lightGray.cgColor
+        
+        let attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string:"ship", attributes:[NSForegroundColorAttributeName : UIColor.black]))
+        attributedString.append(NSAttributedString(string:" or", attributes: [NSForegroundColorAttributeName:UIColor.lightGray]))
+        view.beforeAisleLabel.attributedText = attributedString
+        
+    
     }
     
     func selectView(_ view: ProductListView, item: ListItemViewState) {
@@ -28,6 +66,6 @@ struct ProductListComponent: Component {
 
 extension ProductListComponent: HarmonyLayoutComponent {
     func heightForLayout(_ layout: HarmonyLayout, item: TempoViewStateItem, width: CGFloat) -> CGFloat {
-        return 100.0
+        return 120.0
     }
 }

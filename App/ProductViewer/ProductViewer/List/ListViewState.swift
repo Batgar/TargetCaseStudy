@@ -22,6 +22,8 @@ struct ListItemViewState: TempoViewStateItem, Equatable {
     let title: String
     let price: String
     let image: UIImage?
+    let url : URL?
+    let aisle : String
 }
 
 func ==(lhs: ListItemViewState, rhs: ListItemViewState) -> Bool {

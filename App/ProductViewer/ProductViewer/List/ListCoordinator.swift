@@ -59,8 +59,56 @@ class ListCoordinator: TempoCoordinator {
     }
     
     func updateState() {
-        viewState.listItems = (1..<10).map { index in
-            ListItemViewState(title: "Puppies!!!", price: "$9.99", image: UIImage(named: "\(index)"))
+        
+        //Async load items as JSON. When items are available, then trigger that the items are ready via the
+        //dispatcher, so the subscribed view can update.
+        
+        DealModelLoader.loadDeals {
+            dealRoot in
+        
+            DispatchQueue.main.async {
+                
+                if dealRoot.isEmpty {
+                    self.viewState.listItems = [
+                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"))
+                    ]
+                    return
+                }
+                
+                guard let deals = dealRoot.deals else {
+                    self.viewState.listItems = [
+                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"))
+                    ]
+                    return
+                }
+                
+                if deals.count <= 0 {
+                    self.viewState.listItems = [
+                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"))
+                    ]
+                    return
+                }
+                
+                //Yes! We have valid deals! Woo hoo! Process them as best we can into list view items...
+                //Someday: Async load that image per item so we don't wait around for them!
+                
+                self.viewState.listItems = deals.map { deal in
+                    
+                    var image = UIImage(named:"0") //Default or 'error' image.
+                    
+                    
+                    if let imageURL = deal.image,
+                        let data = try? Data(contentsOf: imageURL) {
+                        image = UIImage(data:data)
+                    }
+                    
+                    return ListItemViewState(title: deal.title, price: deal.price, image: image)
+                }
+                
+                self.dispatcher.triggerEvent(ListItemReady())
+                
+                self.updateUI()
+            }
         }
     }
 }

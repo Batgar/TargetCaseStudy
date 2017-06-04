@@ -28,6 +28,18 @@ struct ProductListComponent: Component {
     func configureView(_ view: ProductListView, item: ListItemViewState) {
         view.titleLabel.text = item.title
         view.priceLabel.text = item.price
+        
+        if let imageURL = item.url {
+            UIImage.loadFromURL(url: imageURL) {
+                asyncLoadedImage in
+                DispatchQueue.main.async {
+                    //This may replace any place holder image loaded below.
+                    view.productImage.image = asyncLoadedImage
+                }
+            }
+        }
+        
+        //No matter what load a possible place holder image given to us...
         view.productImage.image = item.image
     }
     

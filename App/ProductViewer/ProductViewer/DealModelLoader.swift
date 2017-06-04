@@ -25,7 +25,7 @@ class DealModelLoader {
         let task = session.dataTask(with: request as URLRequest, completionHandler: {
             data, response, error in
             
-            if let e = error {
+            if let _ = error {
                 completion(DealRoot.empty())
                 return
             }

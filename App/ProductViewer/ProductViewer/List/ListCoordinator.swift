@@ -70,21 +70,21 @@ class ListCoordinator: TempoCoordinator {
                 
                 if dealRoot.isEmpty {
                     self.viewState.listItems = [
-                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"))
+                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil)
                     ]
                     return
                 }
                 
                 guard let deals = dealRoot.deals else {
                     self.viewState.listItems = [
-                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"))
+                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil)
                     ]
                     return
                 }
                 
                 if deals.count <= 0 {
                     self.viewState.listItems = [
-                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"))
+                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil)
                     ]
                     return
                 }
@@ -96,13 +96,7 @@ class ListCoordinator: TempoCoordinator {
                     
                     var image = UIImage(named:"0") //Default or 'error' image.
                     
-                    
-                    if let imageURL = deal.image,
-                        let data = try? Data(contentsOf: imageURL) {
-                        image = UIImage(data:data)
-                    }
-                    
-                    return ListItemViewState(title: deal.title, price: deal.price, image: image)
+                    return ListItemViewState(title: deal.title, price: deal.price, image: image, url: deal.image)
                 }
                 
                 self.dispatcher.triggerEvent(ListItemReady())

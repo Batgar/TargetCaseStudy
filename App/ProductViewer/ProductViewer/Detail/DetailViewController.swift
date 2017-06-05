@@ -47,6 +47,13 @@ class DetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
     }
+    @IBAction func addToListTouchUpInside(_ sender: Any) {
+        coordinator.dispatcher.triggerEvent(AddToListPressed())
+    }
     
+    @IBAction func addToCartTouchUpInside(_ sender: Any) {
+        
+        coordinator.dispatcher.triggerEvent(AddToCartPressed())
+    }
 }
 

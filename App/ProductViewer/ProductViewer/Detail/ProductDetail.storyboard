@@ -69,6 +69,9 @@
                                             <constraint firstAttribute="height" constant="30" id="pbs-dh-5fT"/>
                                         </constraints>
                                         <state key="normal" title="add to cart"/>
+                                        <connections>
+                                            <action selector="addToCartTouchUpInside:" destination="Ipi-Y3-Urn" eventType="touchUpInside" id="YtK-Nd-6hN"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cus-BY-B74">
                                         <rect key="frame" x="0.0" y="573" width="375" height="30"/>
@@ -76,6 +79,9 @@
                                             <constraint firstAttribute="height" constant="30" id="ILN-94-iCA"/>
                                         </constraints>
                                         <state key="normal" title="add to list"/>
+                                        <connections>
+                                            <action selector="addToListTouchUpInside:" destination="Ipi-Y3-Urn" eventType="touchUpInside" id="kWv-Bk-HT8"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

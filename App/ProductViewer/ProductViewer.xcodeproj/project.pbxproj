@@ -25,6 +25,13 @@
 		6C18B69B1EE4796200CAAEF6 /* Decodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C18B69A1EE4796200CAAEF6 /* Decodable.framework */; };
 		6C18B69C1EE4796200CAAEF6 /* Decodable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C18B69A1EE4796200CAAEF6 /* Decodable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6C18B69F1EE497B000CAAEF6 /* UIImage+AsyncImageLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C18B69E1EE497B000CAAEF6 /* UIImage+AsyncImageLoad.swift */; };
+		6C18B6A21EE4B66B00CAAEF6 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C18B6A11EE4B66B00CAAEF6 /* ProductDetailView.swift */; };
+		6C18B6A41EE4B74600CAAEF6 /* ProductDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C18B6A31EE4B74600CAAEF6 /* ProductDetailView.xib */; };
+		6C18B6A81EE4B85D00CAAEF6 /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C18B6A71EE4B85D00CAAEF6 /* DetailCoordinator.swift */; };
+		6C18B6AA1EE4B87100CAAEF6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C18B6A91EE4B87100CAAEF6 /* DetailViewController.swift */; };
+		6C18B6AC1EE4B88800CAAEF6 /* DetailViewEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C18B6AB1EE4B88800CAAEF6 /* DetailViewEvents.swift */; };
+		6C18B6AE1EE4BF6900CAAEF6 /* DetailViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C18B6AD1EE4BF6900CAAEF6 /* DetailViewState.swift */; };
+		6C18B6B21EE4DB4500CAAEF6 /* DevailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C18B6B11EE4DB4500CAAEF6 /* DevailViewPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +70,13 @@
 		6C18B6981EE4781700CAAEF6 /* Deal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deal.swift; sourceTree = "<group>"; };
 		6C18B69A1EE4796200CAAEF6 /* Decodable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Decodable.framework; path = ../../Carthage/Build/iOS/Decodable.framework; sourceTree = "<group>"; };
 		6C18B69E1EE497B000CAAEF6 /* UIImage+AsyncImageLoad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+AsyncImageLoad.swift"; sourceTree = "<group>"; };
+		6C18B6A11EE4B66B00CAAEF6 /* ProductDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		6C18B6A31EE4B74600CAAEF6 /* ProductDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDetailView.xib; sourceTree = "<group>"; };
+		6C18B6A71EE4B85D00CAAEF6 /* DetailCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
+		6C18B6A91EE4B87100CAAEF6 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		6C18B6AB1EE4B88800CAAEF6 /* DetailViewEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewEvents.swift; sourceTree = "<group>"; };
+		6C18B6AD1EE4BF6900CAAEF6 /* DetailViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewState.swift; sourceTree = "<group>"; };
+		6C18B6B11EE4DB4500CAAEF6 /* DevailViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevailViewPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +142,12 @@
 		5BEF08101D66328D006BF0C0 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				6C18B6A01EE4B64500CAAEF6 /* Components */,
+				6C18B6A71EE4B85D00CAAEF6 /* DetailCoordinator.swift */,
+				6C18B6A91EE4B87100CAAEF6 /* DetailViewController.swift */,
+				6C18B6AB1EE4B88800CAAEF6 /* DetailViewEvents.swift */,
+				6C18B6AD1EE4BF6900CAAEF6 /* DetailViewState.swift */,
+				6C18B6B11EE4DB4500CAAEF6 /* DevailViewPresenter.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -166,6 +186,15 @@
 				6C18B69E1EE497B000CAAEF6 /* UIImage+AsyncImageLoad.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		6C18B6A01EE4B64500CAAEF6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6C18B6A11EE4B66B00CAAEF6 /* ProductDetailView.swift */,
+				6C18B6A31EE4B74600CAAEF6 /* ProductDetailView.xib */,
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B259CD41D6630E0001D755F /* LaunchScreen.storyboard in Resources */,
+				6C18B6A41EE4B74600CAAEF6 /* ProductDetailView.xib in Resources */,
 				5B259CD11D6630E0001D755F /* Assets.xcassets in Resources */,
 				5BEF08211D6635B2006BF0C0 /* ProductListView.xib in Resources */,
 			);
@@ -244,11 +274,17 @@
 				5B259CCA1D6630E0001D755F /* AppDelegate.swift in Sources */,
 				5BEF081F1D663598006BF0C0 /* ProductListView.swift in Sources */,
 				6C18B69F1EE497B000CAAEF6 /* UIImage+AsyncImageLoad.swift in Sources */,
+				6C18B6AC1EE4B88800CAAEF6 /* DetailViewEvents.swift in Sources */,
 				5B302A8F1D663A8500FA2FFD /* ProductListComponent.swift in Sources */,
+				6C18B6A21EE4B66B00CAAEF6 /* ProductDetailView.swift in Sources */,
 				6C18B6971EE476A400CAAEF6 /* DealRoot.swift in Sources */,
+				6C18B6A81EE4B85D00CAAEF6 /* DetailCoordinator.swift in Sources */,
 				5BEF08141D663304006BF0C0 /* ListViewController.swift in Sources */,
+				6C18B6AE1EE4BF6900CAAEF6 /* DetailViewState.swift in Sources */,
+				6C18B6B21EE4DB4500CAAEF6 /* DevailViewPresenter.swift in Sources */,
 				5BEF08121D6632EC006BF0C0 /* ListCoordinator.swift in Sources */,
 				6C18B6991EE4781700CAAEF6 /* Deal.swift in Sources */,
+				6C18B6AA1EE4B87100CAAEF6 /* DetailViewController.swift in Sources */,
 				6C18B6951EE4743100CAAEF6 /* DealModelLoader.swift in Sources */,
 				5B2675A21D674B400015A238 /* ListEvents.swift in Sources */,
 			);

@@ -11,8 +11,13 @@ import UIKit
 /// All-to-common utility for pinning a subviews edges to it's parentview edges.
 public extension UIView {
     public func pinSubview(_ subview: UIView) {
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[subview]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["subview": subview]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[subview]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["subview": subview]))
+        
+        var allConstraints = [NSLayoutConstraint]()
+        
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[subview]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["subview": subview])
+        allConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[subview]-0-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["subview": subview])
+        
+        NSLayoutConstraint.activate(allConstraints)
     }
     
     public func addAndPinSubview(_ subview: UIView) {

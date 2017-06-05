@@ -13,28 +13,29 @@ import Tempo
 class DetailViewController: UIViewController {
     
     class func viewControllerFor(coordinator: TempoCoordinator) -> UINavigationController {
-        let viewController = DetailViewController()
-        viewController.coordinator = coordinator
+        let storyboard = UIStoryboard(name: "ProductDetail", bundle: nil)
         
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.navigationBar.isTranslucent = false
+        
+        let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
+        let detailViewController = navigationController.viewControllers[0] as! DetailViewController
+        
+        detailViewController.coordinator = coordinator
+        
         return navigationController
     }
     
     fileprivate var coordinator: TempoCoordinator!
     
-    lazy var productDetailView: ProductDetailView = {
-        return UIView.fromNib()
-    }()
+    @IBOutlet weak var priceLabel: UILabel!
+   
+    @IBOutlet weak var itemImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Done", style:.done, target:self, action:#selector(dismissModal) )
         
-        view.addAndPinSubview(productDetailView)
-        
-        coordinator.presenters = [DetailViewPresenter(detailView:self.productDetailView,
+        coordinator.presenters = [DetailViewPresenter(detailViewController:self,
                                                       dispatcher:coordinator.dispatcher)]
         
     }

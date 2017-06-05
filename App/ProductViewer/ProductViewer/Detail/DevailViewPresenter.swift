@@ -23,6 +23,14 @@ class DetailViewPresenter : TempoPresenter {
     func present(_ viewState: DetailViewState) {
         detailView.priceLabel.text = viewState.itemViewState.price
         
+        if let imageURL = viewState.itemViewState.url {
+            UIImage.loadFromURL(url: imageURL) {
+                image in
+                DispatchQueue.main.async {
+                    self.detailView.itemImage.image = image
+                }
+            }
+        }
         
     }
 }

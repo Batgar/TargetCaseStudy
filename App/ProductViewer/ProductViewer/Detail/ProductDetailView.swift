@@ -12,6 +12,10 @@ import Tempo
 
 final class ProductDetailView: UIView {
     @IBOutlet weak var priceLabel: UILabel!
+    
+    
+    @IBOutlet weak var itemImage: UIImageView!
+    
 }
 
 /*extension ProductDetailView: ReusableView {

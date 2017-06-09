@@ -8,7 +8,9 @@
 
 import Tempo
 
-struct ListItemPressed: EventType {}
+struct ListItemPressed: EventType {
+    let item : ListItemViewState
+}
 
 //Added by Dan Edgar to handle item async loading.
 struct ListItemReady: EventType {}

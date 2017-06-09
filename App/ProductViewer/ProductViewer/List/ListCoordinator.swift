@@ -52,9 +52,12 @@ class ListCoordinator: TempoCoordinator {
     
     fileprivate func registerListeners() {
         dispatcher.addObserver(ListItemPressed.self) { [weak self] e in
-            let alert = UIAlertController(title: "Item selected!", message: "🐶", preferredStyle: .alert)
+            /*let alert = UIAlertController(title: "Item selected!", message: "🐶", preferredStyle: .alert)
             alert.addAction( UIAlertAction(title: "OK", style: .cancel, handler: nil) )
-            self?.viewController.present(alert, animated: true, completion: nil)
+            self?.viewController.present(alert, animated: true, completion: nil)*/
+            
+            let detailCoordinator = DetailCoordinator(incomingViewState: e.item)
+            self?.viewController.present(detailCoordinator.viewController, animated:true, completion:nil)
         }
     }
     

@@ -1,1 +1,2 @@
 github "Anviking/Decodable" ~> 0.5
+github "NYTimes/NYTPhotoViewer"

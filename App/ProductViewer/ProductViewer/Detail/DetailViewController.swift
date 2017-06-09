@@ -57,5 +57,10 @@ class DetailViewController: UIViewController {
         
         coordinator.dispatcher.triggerEvent(AddToCartPressed())
     }
+    @IBAction func tapImage(_ sender: Any) {
+        if let itemImage = itemImage.image {
+            coordinator.dispatcher.triggerEvent(BlowUpImage(images: [itemImage]))
+        }
+    }
 }
 

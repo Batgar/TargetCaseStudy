@@ -16,6 +16,12 @@ class DetailViewPresenter : TempoPresenter {
           dispatcher: Dispatcher) {
         self.detailViewController = detailViewController
         self.dispatcher = dispatcher
+        
+        detailViewController.addToCartButton.layer.cornerRadius = 5
+        detailViewController.addToCartButton.clipsToBounds = true
+        
+        detailViewController.addToListButton.layer.cornerRadius = 5
+        detailViewController.addToCartButton.clipsToBounds = true
     }
     
     var detailViewController : DetailViewController

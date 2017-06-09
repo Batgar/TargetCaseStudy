@@ -29,7 +29,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
    
     @IBOutlet weak var itemImage: UIImageView!
+    @IBOutlet weak var addToCartButton: UIButton!
     
+    @IBOutlet weak var addToListButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         

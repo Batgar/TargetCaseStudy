@@ -28,7 +28,7 @@
         <!--Detail View Controller-->
         <scene sceneID="TDE-tV-Yce">
             <objects>
-                <viewController id="Ipi-Y3-Urn" customClass="DetailViewController" customModule="ProductViewer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewControllerID" id="Ipi-Y3-Urn" customClass="DetailViewController" customModule="ProductViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cEk-Ml-ds0"/>
                         <viewControllerLayoutGuide type="bottom" id="XWv-5C-ewy"/>

@@ -8,6 +8,7 @@
 
 import UIKit
 import NYTPhotoViewer
+import Tempo
 
 @objc class ProductPhoto : NSObject, NYTPhoto {
     
@@ -15,8 +16,8 @@ import NYTPhotoViewer
     var imageData: Data?
     var placeholderImage: UIImage?
     let attributedCaptionTitle: NSAttributedString?
-    var attributedCaptionSummary: NSAttributedString? = NSAttributedString(string: "summary string", attributes: [NSForegroundColorAttributeName: UIColor.gray])
-    let attributedCaptionCredit: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.darkGray])
+    var attributedCaptionSummary: NSAttributedString? = NSAttributedString(string: "summary string", attributes: [NSForegroundColorAttributeName: HarmonyColor.targetFadeAwayGrayColor])
+    let attributedCaptionCredit: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: HarmonyColor.targetNeutralGrayColor])
     
     init(image: UIImage? = nil, imageData: Data? = nil, attributedCaptionTitle: NSAttributedString? = nil, attributedCaptionSummary : NSAttributedString? = nil) {
         self.image = image

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Tempo
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,10 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let listCoordinator = ListCoordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
+        
+        let mainNavigationController = UINavigationController(rootViewController: listCoordinator.viewController)
+        
+        mainNavigationController.navigationBar.isTranslucent = false
+        mainNavigationController.navigationBar.barTintColor = HarmonyColor.targetBullseyeRedColor
+        mainNavigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : HarmonyColor.targetStarkWhiteColor];
+    
+    mainNavigationController.navigationBar.setBackgroundImage(UIImage(named:"TargetHeader"), for: UIBarMetrics.default)
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = listCoordinator.viewController
-        window?.addSubview(listCoordinator.viewController.view)
+        window?.rootViewController = mainNavigationController //listCoordinator.viewController
+        /*window?.addSubview(listCoordinator.viewController.view)*/
         window?.makeKeyAndVisible()
         
         return true

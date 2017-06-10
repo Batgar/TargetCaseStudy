@@ -12,16 +12,18 @@ import Tempo
 
 class DetailViewController: UIViewController {
     
-    class func viewControllerFor(coordinator: TempoCoordinator) -> UINavigationController {
+    class func viewControllerFor(coordinator: TempoCoordinator) -> UIViewController {
         let storyboard = UIStoryboard(name: "ProductDetail", bundle: nil)
         
         
-        let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
-        let detailViewController = navigationController.viewControllers[0] as! DetailViewController
+        /*let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
+        let detailViewController = navigationController.viewControllers[0] as! DetailViewController*/
+        
+        let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewControllerID") as! DetailViewController
         
         detailViewController.coordinator = coordinator as? DetailCoordinator
         
-        return navigationController
+        return detailViewController //navigationController
     }
     
     fileprivate var coordinator: DetailCoordinator!
@@ -35,7 +37,8 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Done", style:.done, target:self, action:#selector(dismissModal) )
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Done", style:.done, target:self, action:#selector(dismissModal) )
+        
         
         coordinator.presenters = [DetailViewPresenter(detailViewController:self,
                                                       dispatcher:coordinator.dispatcher)]

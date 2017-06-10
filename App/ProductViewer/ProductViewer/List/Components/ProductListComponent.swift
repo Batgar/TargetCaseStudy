@@ -21,7 +21,7 @@ struct ProductListComponent: Component {
         
         // border
         view.layer.borderWidth = 1.0
-        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.borderColor = HarmonyColor.targetNeutralGrayColor.cgColor
 
         
     }
@@ -49,11 +49,11 @@ struct ProductListComponent: Component {
         
         view.aisleLabel.layer.cornerRadius = view.aisleLabel.bounds.size.height / 2
         view.aisleLabel.layer.borderWidth = 1.0
-        view.aisleLabel.layer.borderColor = UIColor.lightGray.cgColor
+        view.aisleLabel.layer.borderColor = HarmonyColor.targetNeutralGrayColor.cgColor
         
         let attributedString = NSMutableAttributedString()
-        attributedString.append(NSAttributedString(string:"ship", attributes:[NSForegroundColorAttributeName : UIColor.black]))
-        attributedString.append(NSAttributedString(string:" or", attributes: [NSForegroundColorAttributeName:UIColor.lightGray]))
+        attributedString.append(NSAttributedString(string:"ship", attributes:[NSForegroundColorAttributeName : HarmonyColor.targetJetBlackColor]))
+        attributedString.append(NSAttributedString(string:" or", attributes: [NSForegroundColorAttributeName:HarmonyColor.targetNeutralGrayColor]))
         view.beforeAisleLabel.attributedText = attributedString
         
     

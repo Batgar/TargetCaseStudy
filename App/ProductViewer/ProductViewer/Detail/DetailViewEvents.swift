@@ -12,3 +12,7 @@ struct AddToCartPressed: EventType {}
 
 //Added by Dan Edgar to handle item async loading.
 struct AddToListPressed: EventType {}
+
+struct BlowUpImage: EventType {
+    let image : UIImage
+}

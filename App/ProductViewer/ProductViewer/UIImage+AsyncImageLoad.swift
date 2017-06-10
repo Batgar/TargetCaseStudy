@@ -16,18 +16,15 @@ extension UIImage {
         DispatchQueue.global(qos: .default).async {
             
             if let imageData = try? Data(contentsOf: url) {
+                
                 DispatchQueue.main.async {
                     if let image = UIImage(data: imageData) {
                         callback(image)
                     }
                 }
+                
             }
+            
         }
-    }
-}
-
-extension UIView {
-    class func fromNib<T : UIView>() -> T {
-        return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
     }
 }

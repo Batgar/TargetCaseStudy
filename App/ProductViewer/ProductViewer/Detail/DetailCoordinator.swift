@@ -10,6 +10,7 @@
 
 import Foundation
 import Tempo
+import NYTPhotoViewer
 
 /*
  Coordinator for the product list
@@ -63,6 +64,22 @@ class DetailCoordinator: TempoCoordinator {
             let alert = UIAlertController(title: "Item added to list!", message: "🐶", preferredStyle: .alert)
             alert.addAction( UIAlertAction(title: "OK", style: .cancel, handler: nil) )
             self?.viewController.present(alert, animated: true, completion: nil)
+        }
+        
+        dispatcher.addObserver(BlowUpImage.self) { [weak self] e in
+            
+            let productImages = [ProductPhoto(image:e.image,
+                                              attributedCaptionTitle: NSAttributedString(string:self!.viewState.itemViewState.price,
+                                                                                         attributes:[NSForegroundColorAttributeName :
+                                                UIColor.white]),
+                                              attributedCaptionSummary: NSAttributedString(
+                    string:self!.viewState.itemViewState.title,
+                                                                                            attributes: [NSForegroundColorAttributeName: UIColor.gray]))]
+                
+            let photosViewController =
+                    NYTPhotosViewController(photos:productImages)
+            
+            self?.viewController.present(photosViewController,  animated: true, completion: nil)
         }
     }
 }

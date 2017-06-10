@@ -71,10 +71,10 @@ class DetailCoordinator: TempoCoordinator {
             let productImages = [ProductPhoto(image:e.image,
                                               attributedCaptionTitle: NSAttributedString(string:self!.viewState.itemViewState.price,
                                                                                          attributes:[NSForegroundColorAttributeName :
-                                                UIColor.white]),
+                                                HarmonyColor.targetStarkWhiteColor]),
                                               attributedCaptionSummary: NSAttributedString(
                     string:self!.viewState.itemViewState.title,
-                                                                                            attributes: [NSForegroundColorAttributeName: UIColor.gray]))]
+                                                                                            attributes: [NSForegroundColorAttributeName: HarmonyColor.targetNeutralGrayColor]))]
                 
             let photosViewController =
                     NYTPhotosViewController(photos:productImages)

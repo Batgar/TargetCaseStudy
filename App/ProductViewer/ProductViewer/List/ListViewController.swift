@@ -12,6 +12,7 @@ import Tempo
 class ListViewController: UIViewController {
     
     class func viewControllerFor(coordinator: TempoCoordinator) -> ListViewController {
+        
         let viewController = ListViewController()
         viewController.coordinator = coordinator
         
@@ -40,7 +41,7 @@ class ListViewController: UIViewController {
         view.addAndPinSubview(collectionView)
         collectionView.contentInset = UIEdgeInsets(top: 20.0, left: 0.0, bottom: 0.0, right: 0.0)
         
-        title = "checkout"
+        title = "deals"
         
         let components: [ComponentType] = [
             ProductListComponent()

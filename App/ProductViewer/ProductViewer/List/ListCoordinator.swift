@@ -66,11 +66,16 @@ class ListCoordinator: TempoCoordinator {
         
         //Async load items as JSON. When items are available, then trigger that the items are ready via the
         //dispatcher, so the subscribed view can update.
+        //Before we update the state, we should let the presenter know that we may want
+        //to show an activity indicator.
+        dispatcher.triggerEvent(DealsLoadingStart())
         
         DealModelLoader.loadDeals {
             dealRoot in
         
             DispatchQueue.main.async {
+                
+                dispatcher.triggerEvent(DealsLoadingEnd())
                 
                 if dealRoot.isEmpty {
                     self.viewState.listItems = [

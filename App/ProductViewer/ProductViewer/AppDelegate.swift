@@ -21,13 +21,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         mainNavigationController.navigationBar.isTranslucent = false
         mainNavigationController.navigationBar.barTintColor = HarmonyColor.targetBullseyeRedColor
-        mainNavigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : HarmonyColor.targetStarkWhiteColor];
+        mainNavigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : HarmonyColor.targetStarkWhiteColor]
     
-    mainNavigationController.navigationBar.setBackgroundImage(UIImage(named:"TargetHeader"), for: UIBarMetrics.default)
+       mainNavigationController.navigationBar.setBackgroundImage(UIImage(named:"TargetHeader"), for: UIBarMetrics.default)
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = mainNavigationController //listCoordinator.viewController
-        /*window?.addSubview(listCoordinator.viewController.view)*/
+        window?.rootViewController = mainNavigationController
+        
+        //I replaced the root view controller with a navigation controller instead.
+        //Wanted to use hierarchical nav instead of modal. Plus wanted the upper navigation bar to style and show more info.
+        
+        //window?.rootViewController = listCoordinator.viewController
+        //window?.addSubview(listCoordinator.viewController.view)
+        
         window?.makeKeyAndVisible()
         
         return true

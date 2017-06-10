@@ -16,12 +16,15 @@ extension UIImage {
         DispatchQueue.global(qos: .default).async {
             
             if let imageData = try? Data(contentsOf: url) {
+                
                 DispatchQueue.main.async {
                     if let image = UIImage(data: imageData) {
                         callback(image)
                     }
                 }
+                
             }
+            
         }
     }
 }

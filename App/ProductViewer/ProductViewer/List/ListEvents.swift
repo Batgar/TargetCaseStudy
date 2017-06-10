@@ -14,3 +14,7 @@ struct ListItemPressed: EventType {
 
 //Added by Dan Edgar to handle item async loading.
 struct ListItemReady: EventType {}
+
+struct DealsLoadingStart : EventType {}
+
+struct DealsLoadingEnd : EventType {}

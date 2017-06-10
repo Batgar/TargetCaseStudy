@@ -44,8 +44,8 @@ class ListCoordinator: TempoCoordinator {
     
     required init() {
         viewState = ListViewState(listItems: [])
-        updateState()
         registerListeners()
+        updateState()
     }
     
     // MARK: ListCoordinator
@@ -60,7 +60,32 @@ class ListCoordinator: TempoCoordinator {
             //We are going to push and keep the nav bar visible.
             self?.viewController.navigationController?.pushViewController(detailCoordinator.viewController, animated: true)
         }
+        
+        dispatcher.addObserver(DealsLoadingStart.self) { [weak self] e in
+            //Start showing the activity indicator on this view.
+            self?.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+            
+            self?.activityIndicator?.color = UIColor.targetJetBlackColor
+            
+            self?.activityIndicator!.startAnimating()
+            
+            self?.activityIndicator!.isHidden = false
+            
+            self?.activityIndicator!.center = (self?.viewController.view.center)!
+            
+            self?.viewController.view.addSubview((self?.activityIndicator)!)
+        }
+        
+        dispatcher.addObserver(DealsLoadingEnd.self) { [weak self] e in
+            //End showing the activity indicator on this view.
+            if let activityIndicator = self?.activityIndicator {
+                activityIndicator.removeFromSuperview()
+                self?.activityIndicator = nil
+            }
+        }
     }
+    
+    var activityIndicator : UIActivityIndicatorView?
     
     func updateState() {
         
@@ -68,14 +93,21 @@ class ListCoordinator: TempoCoordinator {
         //dispatcher, so the subscribed view can update.
         //Before we update the state, we should let the presenter know that we may want
         //to show an activity indicator.
+        
+        //This may be over kill because the handler is also in this class but...
+        //you never know when you may want to move the handler to somewhere else.
         dispatcher.triggerEvent(DealsLoadingStart())
+        
+        
+        //Delay this by 10 seconds to test the activity indicator view.
+        //DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
         
         DealModelLoader.loadDeals {
             dealRoot in
         
             DispatchQueue.main.async {
                 
-                dispatcher.triggerEvent(DealsLoadingEnd())
+                self.dispatcher.triggerEvent(DealsLoadingEnd())
                 
                 if dealRoot.isEmpty {
                     self.viewState.listItems = [
@@ -114,5 +146,6 @@ class ListCoordinator: TempoCoordinator {
                 self.updateUI()
             }
         }
+        //} -- 10 second delay test uncomment out.
     }
 }

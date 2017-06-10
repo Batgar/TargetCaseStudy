@@ -19,12 +19,12 @@ class DetailViewController: UIViewController {
         let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
         let detailViewController = navigationController.viewControllers[0] as! DetailViewController
         
-        detailViewController.coordinator = coordinator
+        detailViewController.coordinator = coordinator as? DetailCoordinator
         
         return navigationController
     }
     
-    fileprivate var coordinator: TempoCoordinator!
+    fileprivate var coordinator: DetailCoordinator!
     
     @IBOutlet weak var priceLabel: UILabel!
    
@@ -59,7 +59,7 @@ class DetailViewController: UIViewController {
     }
     @IBAction func tapImage(_ sender: Any) {
         if let itemImage = itemImage.image {
-            coordinator.dispatcher.triggerEvent(BlowUpImage(images: [itemImage]))
+            coordinator.dispatcher.triggerEvent(BlowUpImage(image: itemImage))
         }
     }
 }

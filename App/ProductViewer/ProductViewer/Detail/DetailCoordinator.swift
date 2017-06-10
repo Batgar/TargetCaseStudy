@@ -68,7 +68,13 @@ class DetailCoordinator: TempoCoordinator {
         
         dispatcher.addObserver(BlowUpImage.self) { [weak self] e in
             
-            let productImages = e.images.map{ProductPhoto(image:$0, attributedCaptionTitle: NSAttributedString(string:""))}
+            let productImages = [ProductPhoto(image:e.image,
+                                              attributedCaptionTitle: NSAttributedString(string:self!.viewState.itemViewState.price,
+                                                                                         attributes:[NSForegroundColorAttributeName :
+                                                UIColor.white]),
+                                              attributedCaptionSummary: NSAttributedString(
+                    string:self!.viewState.itemViewState.title,
+                                                                                            attributes: [NSForegroundColorAttributeName: UIColor.gray]))]
                 
             let photosViewController =
                     NYTPhotosViewController(photos:productImages)

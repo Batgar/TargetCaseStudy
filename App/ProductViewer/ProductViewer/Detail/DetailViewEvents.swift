@@ -14,5 +14,5 @@ struct AddToCartPressed: EventType {}
 struct AddToListPressed: EventType {}
 
 struct BlowUpImage: EventType {
-    let images : [UIImage]
+    let image : UIImage
 }

@@ -55,41 +55,31 @@ class ListCoordinator: TempoCoordinator {
             
             
             let detailCoordinator = DetailCoordinator(incomingViewState: e.item)
-            //self?.viewController.present(detailCoordinator.viewController, animated:true, completion:nil)
+           
             
             //We are going to push and keep the nav bar visible.
             self?.viewController.navigationController?.pushViewController(detailCoordinator.viewController, animated: true)
+            
+            //Modal / popup alternative.
+             //self?.viewController.present(detailCoordinator.viewController, animated:true, completion:nil)
         }
         
         dispatcher.addObserver(DealsLoadingStart.self) { [weak self] e in
-            //Start showing the activity indicator on this view.
-            self?.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
             
-            self?.activityIndicator?.color = UIColor.targetJetBlackColor
-            
-            self?.activityIndicator!.startAnimating()
-            
-            self?.activityIndicator!.isHidden = false
-            
-            self?.activityIndicator!.center = (self?.viewController.view.center)!
-            
-            self?.viewController.view.addSubview((self?.activityIndicator)!)
+            self?.viewController.showActivityIndicator()
         }
         
         dispatcher.addObserver(DealsLoadingEnd.self) { [weak self] e in
-            //End showing the activity indicator on this view.
-            if let activityIndicator = self?.activityIndicator {
-                activityIndicator.removeFromSuperview()
-                self?.activityIndicator = nil
-            }
+            //End showing the activity indicator on this view when the deals are done loading.
+            
+            self?.viewController.hideActivityIndicator()
         }
     }
     
-    var activityIndicator : UIActivityIndicatorView?
-    
     func updateState() {
         
-        //Async load items as JSON. When items are available, then trigger that the items are ready via the
+        //Async load items as JSON from web service. 
+        //When items are available, then trigger that the items are ready via the
         //dispatcher, so the subscribed view can update.
         //Before we update the state, we should let the presenter know that we may want
         //to show an activity indicator.
@@ -111,37 +101,36 @@ class ListCoordinator: TempoCoordinator {
                 
                 if dealRoot.isEmpty {
                     self.viewState.listItems = [
-                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil, aisle:"")
+                        ListItemViewState.unavailable()
                     ]
                     return
                 }
                 
                 guard let deals = dealRoot.deals else {
                     self.viewState.listItems = [
-                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil, aisle:"")
+                        ListItemViewState.unavailable()
                     ]
                     return
                 }
                 
                 if deals.count <= 0 {
                     self.viewState.listItems = [
-                        ListItemViewState(title: "No Deals Available", price: "0.00", image: UIImage(named:"0"), url:nil, aisle:"")
+                        ListItemViewState.unavailable()
                     ]
                     return
                 }
                 
-                //Yes! We have valid deals! Woo hoo! Process them as best we can into list view items...
-                //Someday: Async load that image per item so we don't wait around for them!
+                //Yes! We have valid deals! Woo hoo! Process the 'decoded' structs 
+                //as best we can into list view items.
+                
+                //Long term, since we have structs here, it isn't a big deal to just send on the struct instead of processing out each member.
                 
                 self.viewState.listItems = deals.map { deal in
                     
-                    //This may be a placeholder image if there is no URL in deal.image....
-                    let image = UIImage(named:"0") //Default or 'error' image.
-                    
-                    return ListItemViewState(title: deal.title, price: deal.price, image: image, url: deal.image, aisle:deal.aisle.uppercased())
-                }
+                    //Route to a specialized extension to init the view state (or view model) from the deal (or model)
+                   return ListItemViewState.initializeFromDealModel(deal)
                 
-                self.dispatcher.triggerEvent(ListItemReady())
+                }
                 
                 self.updateUI()
             }

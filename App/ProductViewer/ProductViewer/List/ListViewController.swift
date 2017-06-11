@@ -60,5 +60,29 @@ class ListViewController: UIViewController {
         
     }
     
+    var activityIndicator : UIActivityIndicatorView?
+    
+    func showActivityIndicator() {
+        //Start showing the activity indicator on this view while the deals load.
+        self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        
+        self.activityIndicator?.color = UIColor.targetJetBlackColor
+        
+        self.activityIndicator!.startAnimating()
+        
+        self.activityIndicator!.isHidden = false
+        
+        self.activityIndicator!.center = self.view.center
+        
+        self.view.addSubview((self.activityIndicator)!)
+    }
+    
+    func hideActivityIndicator() {
+        if let activityIndicator = self.activityIndicator {
+            activityIndicator.removeFromSuperview()
+            self.activityIndicator = nil
+        }
+    }
+    
 }
 

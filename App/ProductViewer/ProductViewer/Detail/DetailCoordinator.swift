@@ -46,7 +46,8 @@ class DetailCoordinator: TempoCoordinator {
     // MARK: Init
     
     required init(incomingViewState : ListItemViewState) {
-        viewState = DetailViewState(itemViewState : incomingViewState)
+        viewState = DetailViewState.initFromListItemViewState(incomingViewState)
+        
         updateUI()
         registerListeners()
     }
@@ -69,11 +70,11 @@ class DetailCoordinator: TempoCoordinator {
         dispatcher.addObserver(BlowUpImage.self) { [weak self] e in
             
             let productImages = [ProductPhoto(image:e.image,
-                                              attributedCaptionTitle: NSAttributedString(string:self!.viewState.itemViewState.price,
+                                              attributedCaptionTitle: NSAttributedString(string:self!.viewState.price,
                                                                                          attributes:[NSForegroundColorAttributeName :
                                                 HarmonyColor.targetStarkWhiteColor]),
                                               attributedCaptionSummary: NSAttributedString(
-                    string:self!.viewState.itemViewState.title,
+                    string:self!.viewState.title,
                                                                                             attributes: [NSForegroundColorAttributeName: HarmonyColor.targetNeutralGrayColor]))]
                 
             let photosViewController =

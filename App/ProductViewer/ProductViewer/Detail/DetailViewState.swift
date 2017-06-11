@@ -12,5 +12,9 @@ import Tempo
 
 /// List view state
 struct DetailViewState: TempoViewState {
-    var itemViewState: ListItemViewState
+    
+    let price : String
+    let title : String
+    let url : URL?
+    
 }

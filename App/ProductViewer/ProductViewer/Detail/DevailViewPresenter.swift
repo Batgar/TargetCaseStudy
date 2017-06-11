@@ -29,11 +29,11 @@ class DetailViewPresenter : TempoPresenter {
     var detailViewController : DetailViewController
     
     func present(_ viewState: DetailViewState) {
-        detailViewController.priceLabel.text = viewState.itemViewState.price
+        detailViewController.priceLabel.text = viewState.price
         
-        detailViewController.navigationItem.title = viewState.itemViewState.title
+        detailViewController.navigationItem.title = viewState.title
         
-        if let imageURL = viewState.itemViewState.url {
+        if let imageURL = viewState.url {
             UIImage.loadFromURL(url: imageURL) {
                 image in
                 DispatchQueue.main.async {

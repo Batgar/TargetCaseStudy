@@ -95,9 +95,9 @@
 		6C18B6BC1EEB0A9600CAAEF6 /* NYTPhotoViewerCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NYTPhotoViewerCore.framework; path = ../../Carthage/Build/iOS/NYTPhotoViewerCore.framework; sourceTree = "<group>"; };
 		6C18B6BD1EEB0A9600CAAEF6 /* FLAnimatedImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLAnimatedImage.framework; path = ../../Carthage/Build/iOS/FLAnimatedImage.framework; sourceTree = "<group>"; };
 		6C18B6C41EEB0CA400CAAEF6 /* ProductPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductPhoto.swift; sourceTree = "<group>"; };
-		6C18B6C61EED689E00CAAEF6 /* ListItemViewState+DealModelTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ListItemViewState+DealModelTransforms.swift"; sourceTree = "<group>"; };
-		6C18B6C81EED6AB600CAAEF6 /* ListItemViewState+SpecializedViewModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ListItemViewState+SpecializedViewModels.swift"; sourceTree = "<group>"; };
-		6C18B6CA1EED6D9100CAAEF6 /* DetailViewState+FromListItemViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DetailViewState+FromListItemViewState.swift"; sourceTree = "<group>"; };
+		6C18B6C61EED689E00CAAEF6 /* ListItemViewState+DealModelTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ListItemViewState+DealModelTransforms.swift"; path = "List/ListItemViewState+DealModelTransforms.swift"; sourceTree = "<group>"; };
+		6C18B6C81EED6AB600CAAEF6 /* ListItemViewState+SpecializedViewModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ListItemViewState+SpecializedViewModels.swift"; path = "List/ListItemViewState+SpecializedViewModels.swift"; sourceTree = "<group>"; };
+		6C18B6CA1EED6D9100CAAEF6 /* DetailViewState+FromListItemViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "DetailViewState+FromListItemViewState.swift"; path = "Detail/DetailViewState+FromListItemViewState.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +142,7 @@
 		5B259CC81D6630E0001D755F /* ProductViewer */ = {
 			isa = PBXGroup;
 			children = (
+				6C18B6CC1EED710200CAAEF6 /* Model + View Model Transform Extensions */,
 				6C18B69D1EE4979700CAAEF6 /* Extensions */,
 				6C18B6931EE4741200CAAEF6 /* Deal Models */,
 				5BEF08101D66328D006BF0C0 /* Detail */,
@@ -162,8 +163,6 @@
 				5BEF08131D663304006BF0C0 /* ListViewController.swift */,
 				5BEF08151D66333C006BF0C0 /* ListViewState.swift */,
 				5B2675A11D674B400015A238 /* ListEvents.swift */,
-				6C18B6C61EED689E00CAAEF6 /* ListItemViewState+DealModelTransforms.swift */,
-				6C18B6C81EED6AB600CAAEF6 /* ListItemViewState+SpecializedViewModels.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -177,7 +176,6 @@
 				6C18B6AB1EE4B88800CAAEF6 /* DetailViewEvents.swift */,
 				6C18B6AD1EE4BF6900CAAEF6 /* DetailViewState.swift */,
 				6C18B6B11EE4DB4500CAAEF6 /* DevailViewPresenter.swift */,
-				6C18B6CA1EED6D9100CAAEF6 /* DetailViewState+FromListItemViewState.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -228,6 +226,16 @@
 				6C18B6B31EE582F300CAAEF6 /* ProductDetail.storyboard */,
 			);
 			name = Components;
+			sourceTree = "<group>";
+		};
+		6C18B6CC1EED710200CAAEF6 /* Model + View Model Transform Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6C18B6CA1EED6D9100CAAEF6 /* DetailViewState+FromListItemViewState.swift */,
+				6C18B6C61EED689E00CAAEF6 /* ListItemViewState+DealModelTransforms.swift */,
+				6C18B6C81EED6AB600CAAEF6 /* ListItemViewState+SpecializedViewModels.swift */,
+			);
+			name = "Model + View Model Transform Extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

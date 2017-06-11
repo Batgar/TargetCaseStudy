@@ -22,9 +22,9 @@ Please complete all of the following:
 - Be sure the app looks great on all iPhone sizes!
 
 
-##### Developer Notes
+### Developer Notes
 
-###### Pre-Build Steps
+#### Pre-Build Steps
 This project uses [Carthage](https://github.com/Carthage/Carthage "Carthage") as the dependency system.
 
 Be sure to follow the installation instructions for Carthage (I recommend using HomeBrew).
@@ -46,7 +46,13 @@ This project is now also wired into my developer account via Xcode Automatically
 Make sure to change the dev team and/or bundle IDs as necessary to get your project to build
 and run on a device as needed.
 
-######
+This project is updated for the Swift 3 version matching Xcode 8.3.2
+Any bugs from the Swift conversion of Tempo are strictly mine.
+
+#### Image / Graphic Credits
+I was able to reuse some great [PDF / EPS assets provided by Target](https://corporate.target.com/corporate-responsibility/marketing-resources) to create graphics for use in the app (i.e. the top nav bar background image).
+
+
 
 
 

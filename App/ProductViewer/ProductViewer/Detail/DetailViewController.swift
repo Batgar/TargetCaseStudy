@@ -52,9 +52,19 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func tapImage(_ sender: Any) {
+        zoomIn()
+    }
+    
+    @IBAction func showZoomedInImage(_ sender: Any) {
+        zoomIn()
+    }
+    
+    func zoomIn() {
         if let itemImage = itemImage.image {
             coordinator.dispatcher.triggerEvent(BlowUpImage(image: itemImage))
         }
     }
+    
+    
 }
 

@@ -8,7 +8,13 @@
 
 import Foundation
 
+//Figured that this should be a separate extension just in case
+//we want to isolate future DetailView pieces from this application / 
+//list view dependency.
+
 extension DetailViewState {
+    
+    
     static func initFromListItemViewState(_ listItemViewState : ListItemViewState) -> DetailViewState {
         
     return DetailViewState(price : listItemViewState.price,

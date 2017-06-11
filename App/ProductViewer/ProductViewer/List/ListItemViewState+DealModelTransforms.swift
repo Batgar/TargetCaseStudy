@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+//Figured we should isolate initializing the ListItemViewState from
+//the Deal / underlying Decodable model so we can isolate ListItemViewState
+//in the future for tests or future framework or other uses.
 
 extension ListItemViewState {
     

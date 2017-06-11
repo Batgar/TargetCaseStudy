@@ -86,6 +86,9 @@ class ListCoordinator: TempoCoordinator {
         
         //This may be over kill because the handler is also in this class but...
         //you never know when you may want to move the handler to somewhere else.
+        
+        //I also assume that in the future multiple clients may want want to know
+        //when the async task starts / stops for DealsLoadingStart / DealsLoadingFinish
         dispatcher.triggerEvent(DealsLoadingStart())
         
         

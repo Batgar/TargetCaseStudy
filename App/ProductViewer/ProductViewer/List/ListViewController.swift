@@ -60,6 +60,12 @@ class ListViewController: UIViewController {
         
     }
     
+    //I see this as a 50/50 as to whether or not this should be in the controller vs.
+    //needing a separate list view specific presenter. Due to the framework having an
+    //item specific presenter for collection views / list views, the infrastructure for a
+    //list view presenter is lacking. It could also be a source of confusion to developers
+    //to see a presenter hierarchy for just showing the activity indicator view.
+    
     var activityIndicator : UIActivityIndicatorView?
     
     func showActivityIndicator() {
